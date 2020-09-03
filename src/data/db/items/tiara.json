@@ -1,0 +1,28 @@
+{
+  "id": "tiara",
+  "name": "Tiara",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Able Sisters"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 1075
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 4300
+        }
+      ],
+      "variations": {
+        "silver": "Silver",
+        "rose-gold": "Rose gold",
+        "gold": "Gold"
+      }
+    }
+  },
+  "category": "Hats"
+}

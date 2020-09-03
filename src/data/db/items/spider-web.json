@@ -1,0 +1,18 @@
+{
+  "id": "spider-web",
+  "name": "Spider Web",
+  "games": {
+    "nh": {
+      "orderable": false,
+      "sources": [
+        "Bug-Off"
+      ],
+      "customizable": false,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 25
+      }
+    }
+  },
+  "category": "Furniture"
+}

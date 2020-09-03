@@ -1,0 +1,23 @@
+{
+  "id": "blue-camo-wall",
+  "name": "Blue Camo Wall",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Nook's Cranny"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 287
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 1150
+        }
+      ]
+    }
+  },
+  "category": "Wallpaper"
+}

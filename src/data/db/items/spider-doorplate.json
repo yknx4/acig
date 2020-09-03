@@ -1,0 +1,28 @@
+{
+  "id": "spider-doorplate",
+  "name": "Spider Doorplate",
+  "games": {
+    "nh": {
+      "orderable": false,
+      "sources": [
+        "Bug-Off"
+      ],
+      "customizable": true,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 90
+      },
+      "variations": {
+        "black": "Black",
+        "yellow": "Yellow",
+        "green": "Green",
+        "pink": "Pink",
+        "purple": "Purple",
+        "red": "Red",
+        "gray": "Gray",
+        "blue": "Blue"
+      }
+    }
+  },
+  "category": "Furniture"
+}

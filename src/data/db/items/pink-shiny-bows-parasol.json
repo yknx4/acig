@@ -1,0 +1,23 @@
+{
+  "id": "pink-shiny-bows-parasol",
+  "name": "Pink Shiny-bows Parasol",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Nook's Cranny"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 405
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 1620
+        }
+      ]
+    }
+  },
+  "category": "Umbrellas"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "pastel-puzzle-wall",
+  "name": "Pastel Puzzle Wall",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Nook's Cranny"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 385
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 1540
+        }
+      ]
+    }
+  },
+  "category": "Wallpaper"
+}

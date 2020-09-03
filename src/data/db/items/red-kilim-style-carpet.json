@@ -1,0 +1,20 @@
+{
+  "id": "red-kilim-style-carpet",
+  "name": "Red Kilim-style Carpet",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 500
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 2000
+        }
+      ]
+    }
+  },
+  "category": "Flooring"
+}

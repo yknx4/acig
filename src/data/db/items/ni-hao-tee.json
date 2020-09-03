@@ -1,0 +1,23 @@
+{
+  "id": "ni-hao-tee",
+  "name": "Ni Hao Tee",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 160
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 640
+        }
+      ],
+      "variations": {
+        "pink": "Pink"
+      }
+    }
+  },
+  "category": "Tops"
+}

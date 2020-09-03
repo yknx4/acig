@@ -1,0 +1,27 @@
+{
+  "id": "tweeter",
+  "name": "Tweeter",
+  "category": "Usables",
+  "games": {
+    "nl": {
+      "orderable": false,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 200
+      },
+      "sources": [
+        "Happy Home Showcase (10 StreetPass)",
+        "Countdown (Isabelle -- EU English and Italian)"
+      ]
+    },
+    "nh": {
+      "sources": [
+        "Redd's Raffle"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 200
+      }
+    }
+  }
+}

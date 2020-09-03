@@ -1,0 +1,23 @@
+{
+  "id": "tartan-check-umbrella",
+  "name": "Tartan-check Umbrella",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Nook's Cranny"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 187
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 750
+        }
+      ]
+    }
+  },
+  "category": "Umbrellas"
+}

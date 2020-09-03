@@ -1,0 +1,3 @@
+[submodule "src/data/ACNH"]
+	path = src/data/ACNH
+	url = git@github.com:yknx4/ACNH.git

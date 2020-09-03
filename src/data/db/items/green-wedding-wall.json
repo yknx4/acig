@@ -1,0 +1,17 @@
+{
+  "id": "green-wedding-wall",
+  "name": "Green Wedding Wall",
+  "games": {
+    "nh": {
+      "orderable": false,
+      "sources": [
+        "Cyrus after 7th photo shoot during Wedding Season event (June)"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 750
+      }
+    }
+  },
+  "category": "Wallpaper"
+}

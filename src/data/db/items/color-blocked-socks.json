@@ -1,0 +1,33 @@
+{
+  "id": "color-blocked-socks",
+  "name": "Color-blocked Socks",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Kicks"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 210
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 840
+        }
+      ],
+      "variations": {
+        "purple": "Purple",
+        "green": "Green",
+        "brown": "Brown",
+        "blue": "Blue",
+        "beige": "Beige",
+        "white": "White",
+        "lime": "Lime",
+        "pink": "Pink"
+      }
+    }
+  },
+  "category": "Socks"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "buttoned-lace-skirt",
+  "name": "Buttoned Lace Skirt",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Able Sisters"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 300
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 1200
+        }
+      ],
+      "variations": {
+        "yellow": "Yellow",
+        "white": "White",
+        "pink": "Pink",
+        "green": "Green",
+        "purple": "Purple"
+      }
+    }
+  },
+  "category": "Bottoms"
+}

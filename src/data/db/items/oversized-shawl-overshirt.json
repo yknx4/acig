@@ -1,0 +1,28 @@
+{
+  "id": "oversized-shawl-overshirt",
+  "name": "Oversized Shawl Overshirt",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Able Sisters"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 280
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 1120
+        }
+      ],
+      "variations": {
+        "brown": "Brown",
+        "pink": "Pink",
+        "gray": "Gray"
+      }
+    }
+  },
+  "category": "Tops"
+}

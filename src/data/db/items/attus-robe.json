@@ -1,0 +1,25 @@
+{
+  "id": "attus-robe",
+  "name": "Attus Robe",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 630
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 2520
+        }
+      ],
+      "variations": {
+        "blue": "Blue",
+        "brown": "Brown",
+        "red": "Red"
+      }
+    }
+  },
+  "category": "Dresses"
+}

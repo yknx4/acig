@@ -1,0 +1,27 @@
+{
+  "id": "scallop",
+  "name": "Scallop",
+  "category": "Sea Creatures",
+  "games": {
+    "nl": {
+      "orderable": false,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 1000
+      },
+      "sources": [
+        "In the deep sea."
+      ]
+    },
+    "nh": {
+      "orderable": false,
+      "sources": [
+        "Diving"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 1200
+      }
+    }
+  }
+}

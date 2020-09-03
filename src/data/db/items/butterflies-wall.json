@@ -1,0 +1,18 @@
+{
+  "id": "butterflies-wall",
+  "name": "Butterflies Wall",
+  "games": {
+    "nh": {
+      "orderable": false,
+      "sources": [
+        "Bug-Off"
+      ],
+      "customizable": false,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 840
+      }
+    }
+  },
+  "category": "Wallpaper"
+}

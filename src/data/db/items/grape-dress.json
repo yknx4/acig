@@ -1,0 +1,26 @@
+{
+  "id": "grape-dress",
+  "name": "Grape Dress",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Able Sisters"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 375
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 1500
+        }
+      ],
+      "variations": {
+        "purple": "Purple"
+      }
+    }
+  },
+  "category": "Dresses"
+}

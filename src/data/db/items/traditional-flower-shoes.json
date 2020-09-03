@@ -1,0 +1,30 @@
+{
+  "id": "traditional-flower-shoes",
+  "name": "Traditional Flower Shoes",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Kicks"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 450
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 1800
+        }
+      ],
+      "variations": {
+        "red": "Red",
+        "pink": "Pink",
+        "blue": "Blue",
+        "yellow": "Yellow",
+        "lime": "Lime"
+      }
+    }
+  },
+  "category": "Shoes"
+}

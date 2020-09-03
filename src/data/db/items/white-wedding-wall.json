@@ -1,0 +1,17 @@
+{
+  "id": "white-wedding-wall",
+  "name": "White Wedding Wall",
+  "games": {
+    "nh": {
+      "orderable": false,
+      "sources": [
+        "Cyrus after 1st photo shoot during Wedding Season event (June)"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 750
+      }
+    }
+  },
+  "category": "Wallpaper"
+}

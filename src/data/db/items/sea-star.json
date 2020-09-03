@@ -1,0 +1,27 @@
+{
+  "id": "sea-star",
+  "name": "Sea Star",
+  "category": "Sea Creatures",
+  "games": {
+    "nl": {
+      "orderable": false,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 100
+      },
+      "sources": [
+        "In the deep sea."
+      ]
+    },
+    "nh": {
+      "orderable": false,
+      "sources": [
+        "Diving"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 500
+      }
+    }
+  }
+}

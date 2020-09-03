@@ -1,0 +1,27 @@
+{
+  "id": "sea-slug",
+  "name": "Sea Slug",
+  "category": "Sea Creatures",
+  "games": {
+    "nl": {
+      "orderable": false,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 200
+      },
+      "sources": [
+        "In the deep sea."
+      ]
+    },
+    "nh": {
+      "orderable": false,
+      "sources": [
+        "Diving"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 600
+      }
+    }
+  }
+}

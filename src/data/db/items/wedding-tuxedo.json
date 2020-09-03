@@ -1,0 +1,17 @@
+{
+  "id": "wedding-tuxedo",
+  "name": "Wedding Tuxedo",
+  "games": {
+    "nh": {
+      "orderable": false,
+      "sources": [
+        "Cyrus after 7th photo shoot during Wedding Season event (June)"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 3000
+      }
+    }
+  },
+  "category": "Dresses"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "wedding-chair",
+  "name": "Wedding Chair",
+  "games": {
+    "nh": {
+      "orderable": false,
+      "sources": [
+        "Cyrus after 2nd photo shoot during Wedding Season event (June)"
+      ],
+      "customizable": true,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 500
+      },
+      "variations": {
+        "cute": "Cute",
+        "chic": "Chic",
+        "garden": "Garden"
+      }
+    }
+  },
+  "category": "Furniture"
+}

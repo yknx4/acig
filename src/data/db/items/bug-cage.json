@@ -1,0 +1,21 @@
+{
+  "id": "bug-cage",
+  "name": "Bug Cage",
+  "games": {
+    "nh": {
+      "orderable": false,
+      "sources": [
+        "Bug-Off"
+      ],
+      "customizable": false,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 122
+      },
+      "variations": {
+        "green": "Green"
+      }
+    }
+  },
+  "category": "Accessories"
+}

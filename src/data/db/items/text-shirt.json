@@ -1,0 +1,28 @@
+{
+  "id": "text-shirt",
+  "name": "Text Shirt",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Able Sisters"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 200
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 800
+        }
+      ],
+      "variations": {
+        "black": "Black",
+        "white": "White",
+        "red": "Red"
+      }
+    }
+  },
+  "category": "Tops"
+}

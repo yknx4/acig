@@ -1,0 +1,18 @@
+{
+  "id": "termite-mound",
+  "name": "Termite Mound",
+  "games": {
+    "nh": {
+      "orderable": false,
+      "sources": [
+        "Bug-Off"
+      ],
+      "customizable": false,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 550
+      }
+    }
+  },
+  "category": "Furniture"
+}

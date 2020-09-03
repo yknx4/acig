@@ -1,0 +1,33 @@
+{
+  "id": "zen-hair-clip",
+  "name": "Zen Hair Clip",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Able Sisters"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 1075
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 4300
+        }
+      ],
+      "variations": {
+        "red": "Red",
+        "aqua": "Aqua",
+        "dark-blue": "Dark blue",
+        "golden-yellow": "Golden yellow",
+        "purple": "Purple",
+        "pink": "Pink",
+        "green": "Green",
+        "sky-blue": "Sky blue"
+      }
+    }
+  },
+  "category": "Hats"
+}

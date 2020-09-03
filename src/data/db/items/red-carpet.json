@@ -1,0 +1,20 @@
+{
+  "id": "red-carpet",
+  "name": "Red Carpet",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 375
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 1500
+        }
+      ]
+    }
+  },
+  "category": "Flooring"
+}

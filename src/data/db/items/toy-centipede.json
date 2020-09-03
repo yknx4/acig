@@ -1,0 +1,18 @@
+{
+  "id": "toy-centipede",
+  "name": "Toy Centipede",
+  "games": {
+    "nh": {
+      "orderable": false,
+      "sources": [
+        "Bug-Off"
+      ],
+      "customizable": false,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 50
+      }
+    }
+  },
+  "category": "Furniture"
+}

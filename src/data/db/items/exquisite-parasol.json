@@ -1,0 +1,23 @@
+{
+  "id": "exquisite-parasol",
+  "name": "Exquisite Parasol",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Nook's Cranny"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 417
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 1670
+        }
+      ]
+    }
+  },
+  "category": "Umbrellas"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "kabuki-umbrella",
+  "name": "Kabuki Umbrella",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Nook's Cranny"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 417
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 1670
+        }
+      ]
+    }
+  },
+  "category": "Umbrellas"
+}

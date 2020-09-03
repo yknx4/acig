@@ -1,0 +1,20 @@
+{
+  "id": "simple-medium-red-mat",
+  "name": "Simple Medium Red Mat",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 375
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 1500
+        }
+      ]
+    }
+  },
+  "category": "Flooring"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "logo-umbrella",
+  "name": "Logo Umbrella",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Nook's Cranny"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 162
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 650
+        }
+      ]
+    }
+  },
+  "category": "Umbrellas"
+}

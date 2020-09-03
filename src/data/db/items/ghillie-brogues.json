@@ -1,0 +1,25 @@
+{
+  "id": "ghillie-brogues",
+  "name": "Ghillie Brogues",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 585
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 2340
+        }
+      ],
+      "variations": {
+        "brown": "Brown",
+        "black": "Black",
+        "white": "White"
+      }
+    }
+  },
+  "category": "Shoes"
+}

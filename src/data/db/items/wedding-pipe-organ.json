@@ -1,0 +1,23 @@
+{
+  "id": "wedding-pipe-organ",
+  "name": "Wedding Pipe Organ",
+  "games": {
+    "nh": {
+      "orderable": false,
+      "sources": [
+        "Obtained from Reese after 5th photo shoot during Wedding Season event (June)"
+      ],
+      "customizable": true,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 25000
+      },
+      "variations": {
+        "white": "White",
+        "natural": "Natural",
+        "dark-brown": "Dark Brown"
+      }
+    }
+  },
+  "category": "Furniture"
+}

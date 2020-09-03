@@ -1,0 +1,23 @@
+{
+  "id": "frog-umbrella",
+  "name": "Frog Umbrella",
+  "games": {
+    "nh": {
+      "orderable": true,
+      "sources": [
+        "Nook's Cranny"
+      ],
+      "sellPrice": {
+        "currency": "bells",
+        "value": 392
+      },
+      "buyPrices": [
+        {
+          "currency": "bells",
+          "value": 1570
+        }
+      ]
+    }
+  },
+  "category": "Umbrellas"
+}

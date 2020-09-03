@@ -1,0 +1,23 @@
+{
+  "id": "wedding-decoration",
+  "name": "Wedding Decoration",
+  "games": {
+    "nh": {
+      "orderable": false,
+      "sources": [
+        "Cyrus after 1st photo shoot during Wedding Season event (June)"
+      ],
+      "customizable": true,
+      "sellPrice": {
+        "currency": "bells",
+        "value": 250
+      },
+      "variations": {
+        "cute": "Cute",
+        "chic": "Chic",
+        "garden": "Garden"
+      }
+    }
+  },
+  "category": "Furniture"
+}
