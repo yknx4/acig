@@ -1,69 +1,75 @@
 import React, { useState } from 'react';
 import 'rsuite/dist/styles/rsuite-default.css'
 import './App.css'
-import { Col, Content, Footer, Grid, Header, Panel, Row, SelectPicker, SelectPickerProps, Container, Icon, Nav, Navbar } from 'rsuite'
-import idData from './data/ACNH/item_ids/items_USen.json'
+import { Col, Content, Footer, Grid, Header, Row, SelectPicker, SelectPickerProps, Container, Icon, Nav, Navbar } from 'rsuite'
 import misc from './data/csv_img/miscellaneous.csv.json'
 import hw from './data/csv_img/housewares.csv.json'
 import wm from './data/csv_img/wall-mounted.csv.json'
+import ar from './data/csv_img/art.csv.json'
+import acc from './data/csv_img/accessories.csv.json'
+import ba from './data/csv_img/bags.csv.json'
+import bo from './data/csv_img/bottoms.csv.json'
+import co from './data/csv_img/clothing other.csv.json'
+import du from './data/csv_img/dress-up.csv.json'
+import fl from './data/csv_img/floors.csv.json'
+import hew from './data/csv_img/headwear.csv.json'
+import mu from './data/csv_img/music.csv.json'
+import pho from './data/csv_img/photos.csv.json'
+import po from './data/csv_img/posters.csv.json'
+import ru from './data/csv_img/rugs.csv.json'
+import sh from './data/csv_img/shoes.csv.json'
+import so from './data/csv_img/socks.csv.json'
+import to from './data/csv_img/tools.csv.json'
+import top from './data/csv_img/tops.csv.json'
+import um from './data/csv_img/umbrellas.csv.json'
+import wp from './data/csv_img/wallpaper.csv.json'
 import { map } from 'lodash';
-import ot from './data/output_template.json'
-import { parseVariation } from './utils/itemCodes';
-import { decimalToHex } from './utils/numeric';
 import leafLogo from './assets/leaf-logo.png'
+import { formatCheat } from './utils/formatCheat';
+import { ItemShow } from './ItemShow';
+import { Art, Floor, Garment, Insertable, VariableInsertable } from './definitions/acnh';
+import { isArt, isVariableInsertable } from './utils/items';
 
-const realId = (item: Insertable) => item["Internal ID"] !== '' ? idData.STR_ItemName_00_Ftr.find(ftr => ftr.name === item.Name)!.id[0] as number : 0;
+const photos: Array<VariableInsertable> = pho
+const miscellaneous: Array<VariableInsertable> = misc
+const houseware: Array<VariableInsertable> = hw
+const wallmounted: Array<VariableInsertable> = wm
+const art: Array<Art> = ar as Array<Art>
+const accessories: Array<Garment> = acc
+const bags: Array<Garment> = ba
+const bottoms: Array<Garment> = bo
+const clothingOther: Array<Garment> = co
+const dressUp: Array<Garment> = du
+const floors: Array<Floor> = fl
+const headware: Array<Garment> = hew
+const music: Array<Insertable> = mu
+const posters: Array<Insertable> = po
+const rugs: Array<Floor> = ru
+const shoes: Array<Garment> = sh
+const socks: Array<Garment> = so
+const tops: Array<Garment> = top
+const umbrellas: Array<Insertable> = um
+const tools: Array<VariableInsertable> = to
+const wallpapers: Array<Insertable> = wp
 
-interface Insertable {
-  Name: string;
-  Image: string;
-  Variation: string;
-  "Color 1": string;
-  "Color 2": string;
-  "Internal ID": string;
-  "Unique Entry ID": string;
-  "Variant ID": string;
+const itemsPool: Insertable[] = [...shoes, ...socks, ...tops, ...umbrellas, ...tools, ...wallpapers, ...miscellaneous, ...houseware, ...wallmounted, ...art, ...accessories, ...bags, ...bottoms, ...clothingOther, ...dressUp, ...floors, ...headware, ...music, ...photos, ...posters, ...rugs]
+
+function itemLabel(item: Insertable | Art | VariableInsertable) {
+  if (isArt(item)) {
+    return `${item.Genuine === 'Yes' ? 'Genuine' : 'Fake'} ${item.Name}`
+  }
+  if (isVariableInsertable(item)) {
+    return `${item.Variation} ${item.Name}`
+  }
+  return item.Name
 }
-
-const outputTemplate = ot as string[][]
-const miscellaneous: Array<Insertable> = misc
-const houseware: Array<Insertable> = hw
-const wallmounted: Array<Insertable> = wm
-
-const itemsPool = [...miscellaneous, ...houseware, ...wallmounted]
 
 const dataa: SelectPickerProps['data'] = itemsPool.map(m => ({
   value: m['Unique Entry ID'],
-  label: `${m.Variation} ${m.Name} - ${m["Color 1"]} ${m["Color 2"]}`,
+  label: `${itemLabel(m)} - ${m["Color 1"]} ${m["Color 2"]}`,
   role: m.Name
 }))
 
-function formatCheat(item: Insertable, indexAsString: string) {
-  const index = parseInt(indexAsString, 10)
-  const template = outputTemplate[index]
-  return `${template[0]} ${template[1]} ${parseVariation(item["Variant ID"])} ${decimalToHex(realId(item))}\n`
-}
-
-interface ItemShowProps {
-  item: Insertable
-  small?: boolean
-  onClick?: () => any
-}
-
-function ItemShow(props: ItemShowProps) {
-  const { item, small = false, onClick = () => { } } = props
-  const iconHeight = small ? 90 : 240
-  return (
-    <Panel bordered bodyFill onClick={onClick} className="acitem">
-      <img src={item.Image} height={iconHeight} />
-      <Panel header={item.Name}>
-        <p>
-          <small>Variation: {item.Variation} <br/>Color 1: {item["Color 1"]} <br/>Color 2: {item["Color 2"]} <br/>ItemId: 0x{decimalToHex(realId(item))} <br/>Variation: 0x{parseVariation(item["Variant ID"])}</small>
-        </p>
-      </Panel>
-    </Panel>
-  )
-}
 
 interface EmptyItemProps {
   slot: number
@@ -75,14 +81,14 @@ function EmptyItem(props: EmptyItemProps) {
   const emptyItem: Insertable = {
     Name: `Empty Slot #${props.slot + 1}`,
     Image: leafLogo,
-    Variation: 'NA',
     "Color 1": '',
     "Color 2": '',
     "Internal ID": '',
     "Unique Entry ID": '',
-    "Variant ID": ''
+    Source: '',
+    "Version Unlocked": "0.0.0"
   }
-  return <ItemShow small={true} onClick={onClick} item={emptyItem}/>
+  return <ItemShow small={true} onClick={onClick} item={emptyItem} />
 }
 
 const cellIndex = (row: number, column: number) => (row * 10) + column
@@ -127,9 +133,6 @@ function Main() {
           <Navbar.Body>
             <Nav>
               <Nav.Item icon={<Icon icon="home" />}>AC:NH Inventory Generator</Nav.Item>
-            </Nav>
-            <Nav pullRight>
-              <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>
             </Nav>
           </Navbar.Body>
         </Navbar>
