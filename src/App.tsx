@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'rsuite/dist/styles/rsuite-default.css'
 import './App.css'
-import { Col, Content, Footer, Grid, Header, Row, SelectPicker, SelectPickerProps, Container, Icon, Nav, Navbar } from 'rsuite'
+import { Col, Content, Footer, Grid, Header, Row, SelectPicker, SelectPickerProps, Container, Icon, Nav, Navbar, Sidebar, Button } from 'rsuite'
 import misc from './data/csv_img/miscellaneous.csv.json'
 import hw from './data/csv_img/housewares.csv.json'
 import wm from './data/csv_img/wall-mounted.csv.json'
@@ -23,12 +23,14 @@ import to from './data/csv_img/tools.csv.json'
 import top from './data/csv_img/tops.csv.json'
 import um from './data/csv_img/umbrellas.csv.json'
 import wp from './data/csv_img/wallpaper.csv.json'
+import rp from './data/csv_img/recipes.csv.json'
 import { map } from 'lodash';
 import leafLogo from './assets/leaf-logo.png'
 import { formatCheat } from './utils/formatCheat';
 import { ItemShow } from './ItemShow';
-import { Art, Floor, Garment, Insertable, VariableInsertable } from './definitions/acnh';
-import { isArt, isVariableInsertable } from './utils/items';
+import { Art, Floor, Garment, Insertable, Recipe, VariableInsertable } from './definitions/acnh';
+import { hasColor, isArt, isVariableInsertable, isRecipe } from './utils/items';
+import { range } from 'lodash'
 
 const photos: Array<VariableInsertable> = pho
 const miscellaneous: Array<VariableInsertable> = misc
@@ -51,22 +53,27 @@ const tops: Array<Garment> = top
 const umbrellas: Array<Insertable> = um
 const tools: Array<VariableInsertable> = to
 const wallpapers: Array<Insertable> = wp
+const recipes: Array<Recipe> = rp
 
-const itemsPool: Insertable[] = [...shoes, ...socks, ...tops, ...umbrellas, ...tools, ...wallpapers, ...miscellaneous, ...houseware, ...wallmounted, ...art, ...accessories, ...bags, ...bottoms, ...clothingOther, ...dressUp, ...floors, ...headware, ...music, ...photos, ...posters, ...rugs]
+const itemsPool: Insertable[] = [...shoes, ...socks, ...tops, ...umbrellas, ...tools, ...wallpapers, ...miscellaneous, ...houseware, ...wallmounted, ...art, ...accessories, ...bags, ...bottoms, ...clothingOther, ...dressUp, ...floors, ...headware, ...music, ...photos, ...posters, ...rugs, ...recipes]
 
 function itemLabel(item: Insertable | Art | VariableInsertable) {
+  const postfix = hasColor(item) ? ` - ${item["Color 1"]} ${item["Color 2"]}` : ''
   if (isArt(item)) {
-    return `${item.Genuine === 'Yes' ? 'Genuine' : 'Fake'} ${item.Name}`
+    return `${item.Genuine === 'Yes' ? 'Genuine' : 'Fake'} ${item.Name}${postfix}`
   }
   if (isVariableInsertable(item)) {
-    return `${item.Variation} ${item.Name}`
+    return `${item.Variation} ${item.Name}${postfix}`
   }
-  return item.Name
+  if (isRecipe(item)) {
+    return `${item.Name} - Recipe`
+  }
+  return item.Name + postfix
 }
 
 const dataa: SelectPickerProps['data'] = itemsPool.map(m => ({
   value: m['Unique Entry ID'],
-  label: `${itemLabel(m)} - ${m["Color 1"]} ${m["Color 2"]}`,
+  label: itemLabel(m),
   role: m.Name
 }))
 
@@ -81,8 +88,6 @@ function EmptyItem(props: EmptyItemProps) {
   const emptyItem: Insertable = {
     Name: `Empty Slot #${props.slot + 1}`,
     Image: leafLogo,
-    "Color 1": '',
-    "Color 2": '',
     "Internal ID": '',
     "Unique Entry ID": '',
     Source: '',
@@ -120,15 +125,20 @@ function Main() {
   const [selectedItem, selectItem] = useState(itemsPool[0])
   const [selectedItems, selectItemInCell] = useState<Record<number, Insertable>>({})
   console.log(selectedItem)
+  console.log(selectedItems)
 
+  const nextEmptyIndex = range(40).find(i => selectedItems[i] === undefined) ?? 0
   const selectAcItem = (uid: string) => { selectItem(itemsPool.find(m => m["Unique Entry ID"] === uid) ?? itemsPool[0]) }
-  const fillCell = (row: number, column: number) => selectItemInCell({ ...selectedItems, [cellIndex(row, column)]: selectedItem })
+  const fillIndex = (index: number) => selectItemInCell({ ...selectedItems, [index]: selectedItem })
+  const fillCell = (row: number, column: number) => fillIndex(cellIndex(row, column))
+  const fillEmpty = () => fillIndex(nextEmptyIndex)
+  console.log(`Next empty is: ${nextEmptyIndex}`)
   return (
     <Container>
       <Header>
         <Navbar appearance="inverse">
           <Navbar.Header>
-            <img src={leafLogo} className="logo" alt="Animal Crossing New Horizons Inventory Generator Logo"/>
+            <img src={leafLogo} className="logo" alt="Animal Crossing New Horizons Inventory Generator Logo" />
           </Navbar.Header>
           <Navbar.Body>
             <Nav>
@@ -137,25 +147,29 @@ function Main() {
           </Navbar.Body>
         </Navbar>
       </Header>
-      <Content>
-        <Grid fluid>
-          <Row className="show-grid">
-            <Col xs={24} sm={24} md={8} lg={6}>
-              <SelectPicker data={dataa} groupBy="role" style={{ width: '100%' }} onSelect={selectAcItem} />
-              <ItemShow item={selectedItem} />
-            </Col>
-            <Col xs={24} sm={12} md={8} lg={12}>
-              <InventoryGrid selectedItems={selectedItems} fillCell={fillCell} />
-            </Col>
-            <Col xs={24} sm={12} md={8} lg={6}>
-              <pre>
-                {`[CHEAT CODE]\n`}
-                {map(selectedItems, formatCheat)}
-              </pre>
-            </Col>
-          </Row>
-        </Grid>
-      </Content>
+      <Container>
+        <Sidebar>
+          <SelectPicker data={dataa} groupBy="role" style={{ width: '100%' }} onSelect={selectAcItem} />
+          <ItemShow item={selectedItem} />
+          <Button disabled={Object.values(selectedItems).length >= 40} onClick={fillEmpty}>Fill Next Empty</Button>
+        </Sidebar>
+        <Content>
+          <Grid fluid>
+            <Row className="show-grid">
+              <Col xs={24} sm={12} md={16} lg={18}>
+                <InventoryGrid selectedItems={selectedItems} fillCell={fillCell} />
+              </Col>
+              <Col xs={24} sm={12} md={8} lg={6}>
+                <pre>
+                  {`[CHEAT CODE]\n`}
+                  {map(selectedItems, formatCheat)}
+                </pre>
+              </Col>
+            </Row>
+          </Grid>
+        </Content>
+      </Container>
+
       <Footer>No rights reserved. Do whatever the f*** do you want. Ale Ornelas 2020</Footer>
     </Container>
   )

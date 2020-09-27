@@ -1972,8 +1972,6 @@ export interface DressUp {
 
 export interface BaseInsertable {
   Name: string;
-  "Color 1": string;
-  "Color 2": string;
   Source: string;
   "Version Unlocked": string;
   "Internal ID": string;
@@ -1984,6 +1982,11 @@ export interface BaseInsertable {
 export interface BaseVariation {
   Variation: string
   "Variant ID": string
+}
+
+export interface HasColor {
+ "Color 1": string
+ "Color 2": string
 }
 
 export type Insertable<T = {}> = BaseInsertable & T
@@ -1999,4 +2002,8 @@ export type Floor = Insertable<{
 
 export type Garment = Insertable<{
   Style: string
+}>
+
+export type Recipe = Insertable<{
+  "Crafted Item Internal ID": string
 }>
