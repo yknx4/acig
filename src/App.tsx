@@ -128,7 +128,7 @@ function Main() {
       <Header>
         <Navbar appearance="inverse">
           <Navbar.Header>
-            <img src={leafLogo} className="logo" />
+            <img src={leafLogo} className="logo" alt="Animal Crossing New Horizons Inventory Generator Logo"/>
           </Navbar.Header>
           <Navbar.Body>
             <Nav>

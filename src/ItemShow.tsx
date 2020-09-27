@@ -45,7 +45,7 @@ export function ItemShow(props: ItemShowProps) {
   const iconHeight = small ? 90 : 240;
   return (
     <Panel bordered bodyFill onClick={onClick} className="acitem">
-      <img src={item.Image} height={iconHeight} />
+      <img src={item.Image} height={iconHeight} alt={`${item.Name}`}/>
       <Panel header={item.Name}>
         <p>
           <small>{firstLineData(props.item)} <br />Color 1: {item["Color 1"]} <br />Color 2: {item["Color 2"]} <br />ItemId: 0x{decimalToHex(realId(item))} <br />{lastLineData(item)}</small>
