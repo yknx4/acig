@@ -1,7 +1,7 @@
 {
   "name": "acig",
-  "version": "0.1.0",
-  "private": true,
+  "homepage": "https://yknx4.github.io/acig/",
+  "version": "0.2.0",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -23,6 +23,8 @@
     "typescript": "^4.0.2"
   },
   "scripts": {
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -48,5 +50,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
   }
 }
