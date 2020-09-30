@@ -17,8 +17,6 @@ function itemCheat(item: Insertable | VariableInsertable): string[] {
 
 export function formatCheat(item: Insertable | VariableInsertable, indexAsString: string, player: Player = "Player 1") {
   const index = parseInt(indexAsString, 10);
-  console.log(outputTemplate, player)
-  console.log(outputTemplate[player])
   const template = outputTemplate[player][index];
   const [thirdField, fourthField] =  isRecipe(item) ? recipeCheat(item) : itemCheat(item)
   return `${template[0]} ${template[1]} ${thirdField} ${fourthField}\n`;
