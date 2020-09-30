@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import 'rsuite/dist/styles/rsuite-default.css'
 import './App.css'
 import { Col, Content, Footer, Grid, Header, Row, SelectPicker, SelectPickerProps, Container, Icon, Nav, Navbar, Sidebar, Button } from 'rsuite'
@@ -24,13 +24,14 @@ import top from './data/csv_img/tops.csv.json'
 import um from './data/csv_img/umbrellas.csv.json'
 import wp from './data/csv_img/wallpaper.csv.json'
 import rp from './data/csv_img/recipes.csv.json'
-import { map } from 'lodash';
+import { map } from 'lodash'
 import leafLogo from './assets/leaf-logo.png'
-import { formatCheat } from './utils/formatCheat';
-import { ItemShow } from './ItemShow';
-import { Art, Floor, Garment, Insertable, Recipe, VariableInsertable } from './definitions/acnh';
-import { hasColor, isArt, isVariableInsertable, isRecipe } from './utils/items';
+import { formatCheat } from './utils/formatCheat'
+import { ItemShow } from './ItemShow'
+import { Art, Floor, Garment, Insertable, Recipe, VariableInsertable } from './definitions/acnh'
+import { hasColor, isArt, isVariableInsertable, isRecipe } from './utils/items'
 import { range } from 'lodash'
+import { temp1_5IRecipes, temp1_5Items } from './data/items-1-5'
 
 const photos: Array<VariableInsertable> = pho
 const miscellaneous: Array<VariableInsertable> = misc
@@ -55,10 +56,35 @@ const tools: Array<VariableInsertable> = to
 const wallpapers: Array<Insertable> = wp
 const recipes: Array<Recipe> = rp
 
-const itemsPool: Insertable[] = [...shoes, ...socks, ...tops, ...umbrellas, ...tools, ...wallpapers, ...miscellaneous, ...houseware, ...wallmounted, ...art, ...accessories, ...bags, ...bottoms, ...clothingOther, ...dressUp, ...floors, ...headware, ...music, ...photos, ...posters, ...rugs, ...recipes]
+const itemsPool: Insertable[] = [
+  ...shoes,
+  ...socks,
+  ...tops,
+  ...umbrellas,
+  ...tools,
+  ...wallpapers,
+  ...miscellaneous,
+  ...houseware,
+  ...wallmounted,
+  ...art,
+  ...accessories,
+  ...bags,
+  ...bottoms,
+  ...clothingOther,
+  ...dressUp,
+  ...floors,
+  ...headware,
+  ...music,
+  ...photos,
+  ...posters,
+  ...rugs,
+  ...recipes,
+  ...temp1_5IRecipes,
+  ...temp1_5Items
+]
 
 function itemLabel(item: Insertable | Art | VariableInsertable) {
-  const postfix = hasColor(item) ? ` - ${item["Color 1"]} ${item["Color 2"]}` : ''
+  const postfix = hasColor(item) ? ` - ${item['Color 1']} ${item['Color 2']}` : ''
   if (isArt(item)) {
     return `${item.Genuine === 'Yes' ? 'Genuine' : 'Fake'} ${item.Name}${postfix}`
   }
@@ -71,12 +97,11 @@ function itemLabel(item: Insertable | Art | VariableInsertable) {
   return item.Name + postfix
 }
 
-const dataa: SelectPickerProps['data'] = itemsPool.map(m => ({
+const dataa: SelectPickerProps['data'] = itemsPool.map((m) => ({
   value: m['Unique Entry ID'],
   label: itemLabel(m),
   role: m.Name
 }))
-
 
 interface EmptyItemProps {
   slot: number
@@ -84,19 +109,19 @@ interface EmptyItemProps {
 }
 
 function EmptyItem(props: EmptyItemProps) {
-  const { onClick = () => { } } = props
+  const { onClick = () => {} } = props
   const emptyItem: Insertable = {
     Name: `Empty Slot #${props.slot + 1}`,
     Image: leafLogo,
-    "Internal ID": '',
-    "Unique Entry ID": '',
+    'Internal ID': '',
+    'Unique Entry ID': '',
     Source: '',
-    "Version Unlocked": "0.0.0"
+    'Version Unlocked': '0.0.0'
   }
   return <ItemShow small={true} onClick={onClick} item={emptyItem} />
 }
 
-const cellIndex = (row: number, column: number) => (row * 10) + column
+const cellIndex = (row: number, column: number) => row * 10 + column
 
 interface InventoryGrid {
   selectedItems: Record<number, Insertable>
@@ -108,14 +133,19 @@ function InventoryGrid(props: InventoryGrid) {
   return (
     <Grid fluid>
       <Row>
-        {[0, 1, 2, 3].map(rowIndex => (<>
-          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(columnIndex => (
-            <Col xs={6} key={`column-${rowIndex}-${columnIndex}`}>
-              { selectedItems[cellIndex(rowIndex, columnIndex)] === undefined ? <EmptyItem onClick={() => fillCell(rowIndex, columnIndex)} slot={cellIndex(rowIndex, columnIndex)} /> : <ItemShow onClick={() => fillCell(rowIndex, columnIndex)} small={true} item={selectedItems[cellIndex(rowIndex, columnIndex)]} />}
-            </Col>
-          ))}
-        </>)
-        )}
+        {[0, 1, 2, 3].map((rowIndex) => (
+          <>
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((columnIndex) => (
+              <Col xs={6} key={`column-${rowIndex}-${columnIndex}`}>
+                {selectedItems[cellIndex(rowIndex, columnIndex)] === undefined ? (
+                  <EmptyItem onClick={() => fillCell(rowIndex, columnIndex)} slot={cellIndex(rowIndex, columnIndex)} />
+                ) : (
+                  <ItemShow onClick={() => fillCell(rowIndex, columnIndex)} small={true} item={selectedItems[cellIndex(rowIndex, columnIndex)]} />
+                )}
+              </Col>
+            ))}
+          </>
+        ))}
       </Row>
     </Grid>
   )
@@ -124,15 +154,14 @@ function InventoryGrid(props: InventoryGrid) {
 function Main() {
   const [selectedItem, selectItem] = useState(itemsPool[0])
   const [selectedItems, selectItemInCell] = useState<Record<number, Insertable>>({})
-  console.log(selectedItem)
-  console.log(selectedItems)
 
-  const nextEmptyIndex = range(40).find(i => selectedItems[i] === undefined) ?? 0
-  const selectAcItem = (uid: string) => { selectItem(itemsPool.find(m => m["Unique Entry ID"] === uid) ?? itemsPool[0]) }
+  const nextEmptyIndex = range(40).find((i) => selectedItems[i] === undefined) ?? 0
+  const selectAcItem = (uid: string) => {
+    selectItem(itemsPool.find((m) => m['Unique Entry ID'] === uid) ?? itemsPool[0])
+  }
   const fillIndex = (index: number) => selectItemInCell({ ...selectedItems, [index]: selectedItem })
   const fillCell = (row: number, column: number) => fillIndex(cellIndex(row, column))
   const fillEmpty = () => fillIndex(nextEmptyIndex)
-  console.log(`Next empty is: ${nextEmptyIndex}`)
   return (
     <Container>
       <Header>
@@ -142,7 +171,7 @@ function Main() {
           </Navbar.Header>
           <Navbar.Body>
             <Nav>
-              <Nav.Item icon={<Icon icon="home" />}>AC:NH Inventory Generator</Nav.Item>
+              <Nav.Item icon={<Icon icon="home" />}>AC:NH Inventory Generator V1.5.0</Nav.Item>
             </Nav>
           </Navbar.Body>
         </Navbar>
@@ -151,7 +180,9 @@ function Main() {
         <Sidebar>
           <SelectPicker data={dataa} groupBy="role" style={{ width: '100%' }} onSelect={selectAcItem} />
           <ItemShow item={selectedItem} />
-          <Button disabled={Object.values(selectedItems).length >= 40} onClick={fillEmpty}>Fill Next Empty</Button>
+          <Button disabled={Object.values(selectedItems).length >= 40} onClick={fillEmpty}>
+            Fill Next Empty
+          </Button>
         </Sidebar>
         <Content>
           <Grid fluid>
@@ -162,7 +193,7 @@ function Main() {
               <Col xs={24} sm={12} md={8} lg={6}>
                 <pre>
                   {`[CHEAT CODE]\n`}
-                  {map(selectedItems, formatCheat)}
+                  {map(selectedItems, (k, v) => formatCheat(k, v))}
                 </pre>
               </Col>
             </Row>
@@ -175,4 +206,4 @@ function Main() {
   )
 }
 
-export default Main;
+export default Main
