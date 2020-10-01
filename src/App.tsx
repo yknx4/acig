@@ -9,19 +9,22 @@ import { formatCheat } from './utils/formatCheat'
 import { ItemShow } from './ItemShow'
 import { range, flatMap } from 'lodash'
 import untypedItems from './items/items.json'
+import untypedRecipes from './items/recipes.json'
 import { Items, Category, Variant } from './items/items'
+import { Recipes } from './items/recipes'
 
 interface Selection {
   item: Items
-  variant: Variant
+  selected: Variant | Recipes
 }
 
-const items: Items[] = untypedItems
-const allVariants = flatMap(items.map((i) => i.variants))
-const mapToItems: Record<string, string> = fromPairs(flatMap(items.map((i) => i.variants.map((v) => [v.uniqueEntryId, i.name]))))
+const items: Items[] = untypedItems as Items[]
+const recipes: Recipes[] = untypedRecipes as unknown as Recipes[]
+const allPossibleSelections: Array<Pick<Variant | Recipes, 'uniqueEntryId'>> = [...flatMap(items.map((i) => i.variants)), ...recipes]
+const mapToItems: Record<string, string> = fromPairs([...flatMap(items.map((i) => i.variants.map((v) => [v.uniqueEntryId, i.name]))), ...recipes.map(r => [r.uniqueEntryId, r.name])])
 
-const getSelection = (variant: Variant): Selection => ({
-  variant,
+const getSelection = (variant: Variant | Recipes): Selection => ({
+  selected: variant,
   item: items.find((i) => i.name === mapToItems[variant.uniqueEntryId]) as Items
 })
 
@@ -36,7 +39,7 @@ function itemLabel(item: Items, variant: Variant) {
   return item.name + postfix
 }
 
-const dataa: SelectPickerProps['data'] = flatMap(
+const dataa: SelectPickerProps['data'] = [...flatMap(
   items.map((m) =>
     m.variants.map((v) => ({
       role: m.name,
@@ -44,7 +47,11 @@ const dataa: SelectPickerProps['data'] = flatMap(
       label: itemLabel(m, v)
     }))
   )
-)
+), ...recipes.map(r => ({
+  role: r.name,
+  value: r.uniqueEntryId,
+  label: `${r.name} - Recipe`
+}))]
 
 interface EmptyItemProps {
   slot: number
@@ -91,7 +98,7 @@ function InventoryGrid(props: InventoryGrid) {
                 {selectedItems[cellIndex(rowIndex, columnIndex)] === undefined ? (
                   <EmptyItem onClick={() => fillCell(rowIndex, columnIndex)} slot={cellIndex(rowIndex, columnIndex)} />
                 ) : (
-                  <ItemShow onClick={() => fillCell(rowIndex, columnIndex)} small={true} item={selectedItems[cellIndex(rowIndex, columnIndex)].item} variant={selectedItems[cellIndex(rowIndex, columnIndex)].variant}/>
+                  <ItemShow onClick={() => fillCell(rowIndex, columnIndex)} small={true} item={selectedItems[cellIndex(rowIndex, columnIndex)].item} variant={selectedItems[cellIndex(rowIndex, columnIndex)].selected}/>
                 )}
               </Col>
             ))}
@@ -104,7 +111,7 @@ function InventoryGrid(props: InventoryGrid) {
 
 const defaultSelection: Selection = Object.freeze({
   item: items[0],
-  variant: items[0].variants[0]
+  selected: items[0].variants[0]
 })
 
 function Main() {
@@ -113,7 +120,7 @@ function Main() {
 
   const nextEmptyIndex = range(40).find((i) => selectedItems[i] === undefined) ?? 0
   const selectAcItem = (uid: string) => {
-    selectItem(getSelection(allVariants.find((v) => v.uniqueEntryId === uid) as Variant) ?? defaultSelection)
+    selectItem(getSelection(allPossibleSelections.find((v) => v.uniqueEntryId === uid) as Variant) ?? defaultSelection)
   }
   const fillIndex = (index: number) => selectItemInCell({ ...selectedItems, [index]: selectedItem })
   const fillCell = (row: number, column: number) => fillIndex(cellIndex(row, column))
@@ -135,7 +142,7 @@ function Main() {
       <Container>
         <Sidebar>
           <SelectPicker data={dataa} groupBy="role" style={{ width: '100%' }} onSelect={selectAcItem} />
-          <ItemShow item={selectedItem.item} variant={selectedItem.variant}/>
+          <ItemShow item={selectedItem.item} variant={selectedItem.selected}/>
           <Button disabled={Object.values(selectedItems).length >= 40} onClick={fillEmpty}>
             Fill Next Empty
           </Button>
@@ -149,7 +156,7 @@ function Main() {
               <Col xs={24} sm={12} md={8} lg={6}>
                 <pre>
                   {`[CHEAT CODE]\n`}
-                  {map(selectedItems, (k, v) => formatCheat(k.variant, v))}
+                  {map(selectedItems, (k, v) => formatCheat(k.selected, v))}
                 </pre>
               </Col>
             </Row>

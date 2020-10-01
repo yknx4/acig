@@ -7,5 +7,5 @@ export function isRecipe(input: any): input is Recipes {
 }
 
 export function isVariant(input: any): input is Variant {
-  return has(input, 'uniqueEntryId')
+  return has(input, 'uniqueEntryId') && !has(input, 'craftedItemInternalId')
 }
