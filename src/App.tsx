@@ -2,106 +2,49 @@ import React, { useState } from 'react'
 import 'rsuite/dist/styles/rsuite-default.css'
 import './App.css'
 import { Col, Content, Footer, Grid, Header, Row, SelectPicker, SelectPickerProps, Container, Icon, Nav, Navbar, Sidebar, Button } from 'rsuite'
-import misc from './data/csv_img/miscellaneous.csv.json'
-import hw from './data/csv_img/housewares.csv.json'
-import wm from './data/csv_img/wall-mounted.csv.json'
-import ar from './data/csv_img/art.csv.json'
-import acc from './data/csv_img/accessories.csv.json'
-import ba from './data/csv_img/bags.csv.json'
-import bo from './data/csv_img/bottoms.csv.json'
-import co from './data/csv_img/clothing other.csv.json'
-import du from './data/csv_img/dress-up.csv.json'
-import fl from './data/csv_img/floors.csv.json'
-import hew from './data/csv_img/headwear.csv.json'
-import mu from './data/csv_img/music.csv.json'
-import pho from './data/csv_img/photos.csv.json'
-import po from './data/csv_img/posters.csv.json'
-import ru from './data/csv_img/rugs.csv.json'
-import sh from './data/csv_img/shoes.csv.json'
-import so from './data/csv_img/socks.csv.json'
-import to from './data/csv_img/tools.csv.json'
-import top from './data/csv_img/tops.csv.json'
-import um from './data/csv_img/umbrellas.csv.json'
-import wp from './data/csv_img/wallpaper.csv.json'
-import rp from './data/csv_img/recipes.csv.json'
-import { map } from 'lodash'
+
+import { fromPairs, map } from 'lodash'
 import leafLogo from './assets/leaf-logo.png'
 import { formatCheat } from './utils/formatCheat'
 import { ItemShow } from './ItemShow'
-import { Art, Floor, Garment, Insertable, Recipe, VariableInsertable } from './definitions/acnh'
-import { hasColor, isArt, isVariableInsertable, isRecipe } from './utils/items'
-import { range } from 'lodash'
-import { temp1_5IRecipes, temp1_5Items } from './data/items-1-5'
+import { range, flatMap } from 'lodash'
+import untypedItems from './items/items.json'
+import { Items, Category, Variant } from './items/items'
 
-const photos: Array<VariableInsertable> = pho
-const miscellaneous: Array<VariableInsertable> = misc
-const houseware: Array<VariableInsertable> = hw
-const wallmounted: Array<VariableInsertable> = wm
-const art: Array<Art> = ar as Array<Art>
-const accessories: Array<Garment> = acc
-const bags: Array<Garment> = ba
-const bottoms: Array<Garment> = bo
-const clothingOther: Array<Garment> = co
-const dressUp: Array<Garment> = du
-const floors: Array<Floor> = fl
-const headware: Array<Garment> = hew
-const music: Array<Insertable> = mu
-const posters: Array<Insertable> = po
-const rugs: Array<Floor> = ru
-const shoes: Array<Garment> = sh
-const socks: Array<Garment> = so
-const tops: Array<Garment> = top
-const umbrellas: Array<Insertable> = um
-const tools: Array<VariableInsertable> = to
-const wallpapers: Array<Insertable> = wp
-const recipes: Array<Recipe> = rp
-
-const itemsPool: Insertable[] = [
-  ...shoes,
-  ...socks,
-  ...tops,
-  ...umbrellas,
-  ...tools,
-  ...wallpapers,
-  ...miscellaneous,
-  ...houseware,
-  ...wallmounted,
-  ...art,
-  ...accessories,
-  ...bags,
-  ...bottoms,
-  ...clothingOther,
-  ...dressUp,
-  ...floors,
-  ...headware,
-  ...music,
-  ...photos,
-  ...posters,
-  ...rugs,
-  ...recipes,
-  ...temp1_5IRecipes,
-  ...temp1_5Items
-]
-
-function itemLabel(item: Insertable | Art | VariableInsertable) {
-  const postfix = hasColor(item) ? ` - ${item['Color 1']} ${item['Color 2']}` : ''
-  if (isArt(item)) {
-    return `${item.Genuine === 'Yes' ? 'Genuine' : 'Fake'} ${item.Name}${postfix}`
-  }
-  if (isVariableInsertable(item)) {
-    return `${item.Variation} ${item.Name}${postfix}`
-  }
-  if (isRecipe(item)) {
-    return `${item.Name} - Recipe`
-  }
-  return item.Name + postfix
+interface Selection {
+  item: Items
+  variant: Variant
 }
 
-const dataa: SelectPickerProps['data'] = itemsPool.map((m) => ({
-  value: m['Unique Entry ID'],
-  label: itemLabel(m),
-  role: m.Name
-}))
+const items: Items[] = untypedItems
+const allVariants = flatMap(items.map((i) => i.variants))
+const mapToItems: Record<string, string> = fromPairs(flatMap(items.map((i) => i.variants.map((v) => [v.uniqueEntryId, i.name]))))
+
+const getSelection = (variant: Variant): Selection => ({
+  variant,
+  item: items.find((i) => i.name === mapToItems[variant.uniqueEntryId]) as Items
+})
+
+function itemLabel(item: Items, variant: Variant) {
+  const postfix = variant.colors.length > 0 ? ` - ${variant.colors.join('&')}` : ''
+  if (variant.genuine !== undefined) {
+    return `${variant.genuine ? 'Genuine' : 'Fake'} ${item.name}${postfix}`
+  }
+  if (variant.variation != null) {
+    return `${variant.variation} ${item.name}${postfix}`
+  }
+  return item.name + postfix
+}
+
+const dataa: SelectPickerProps['data'] = flatMap(
+  items.map((m) =>
+    m.variants.map((v) => ({
+      role: m.name,
+      value: v.uniqueEntryId,
+      label: itemLabel(m, v)
+    }))
+  )
+)
 
 interface EmptyItemProps {
   slot: number
@@ -110,21 +53,29 @@ interface EmptyItemProps {
 
 function EmptyItem(props: EmptyItemProps) {
   const { onClick = () => {} } = props
-  const emptyItem: Insertable = {
-    Name: `Empty Slot #${props.slot + 1}`,
-    Image: leafLogo,
-    'Internal ID': '',
-    'Unique Entry ID': '',
-    Source: '',
-    'Version Unlocked': '0.0.0'
+  const emptyItem: Items = {
+    name: `Empty Slot #${props.slot + 1}`,
+    sourceSheet: Category.Other,
+    variants: []
   }
-  return <ItemShow small={true} onClick={onClick} item={emptyItem} />
+  const variant: Variant = {
+    image: leafLogo,
+    filename: '',
+    uniqueEntryId: '',
+    colors: [],
+    themes: [],
+    source: [],
+    internalId: 0,
+    buy: 0,
+    sell: 0
+  }
+  return <ItemShow small={true} onClick={onClick} item={emptyItem} variant={variant} />
 }
 
 const cellIndex = (row: number, column: number) => row * 10 + column
 
 interface InventoryGrid {
-  selectedItems: Record<number, Insertable>
+  selectedItems: Record<number, Selection>
   fillCell: (row: number, col: number) => void
 }
 
@@ -140,7 +91,7 @@ function InventoryGrid(props: InventoryGrid) {
                 {selectedItems[cellIndex(rowIndex, columnIndex)] === undefined ? (
                   <EmptyItem onClick={() => fillCell(rowIndex, columnIndex)} slot={cellIndex(rowIndex, columnIndex)} />
                 ) : (
-                  <ItemShow onClick={() => fillCell(rowIndex, columnIndex)} small={true} item={selectedItems[cellIndex(rowIndex, columnIndex)]} />
+                  <ItemShow onClick={() => fillCell(rowIndex, columnIndex)} small={true} item={selectedItems[cellIndex(rowIndex, columnIndex)].item} variant={selectedItems[cellIndex(rowIndex, columnIndex)].variant}/>
                 )}
               </Col>
             ))}
@@ -151,13 +102,18 @@ function InventoryGrid(props: InventoryGrid) {
   )
 }
 
+const defaultSelection: Selection = Object.freeze({
+  item: items[0],
+  variant: items[0].variants[0]
+})
+
 function Main() {
-  const [selectedItem, selectItem] = useState(itemsPool[0])
-  const [selectedItems, selectItemInCell] = useState<Record<number, Insertable>>({})
+  const [selectedItem, selectItem] = useState<Selection>(defaultSelection)
+  const [selectedItems, selectItemInCell] = useState<Record<number, Selection>>({})
 
   const nextEmptyIndex = range(40).find((i) => selectedItems[i] === undefined) ?? 0
   const selectAcItem = (uid: string) => {
-    selectItem(itemsPool.find((m) => m['Unique Entry ID'] === uid) ?? itemsPool[0])
+    selectItem(getSelection(allVariants.find((v) => v.uniqueEntryId === uid) as Variant) ?? defaultSelection)
   }
   const fillIndex = (index: number) => selectItemInCell({ ...selectedItems, [index]: selectedItem })
   const fillCell = (row: number, column: number) => fillIndex(cellIndex(row, column))
@@ -179,7 +135,7 @@ function Main() {
       <Container>
         <Sidebar>
           <SelectPicker data={dataa} groupBy="role" style={{ width: '100%' }} onSelect={selectAcItem} />
-          <ItemShow item={selectedItem} />
+          <ItemShow item={selectedItem.item} variant={selectedItem.variant}/>
           <Button disabled={Object.values(selectedItems).length >= 40} onClick={fillEmpty}>
             Fill Next Empty
           </Button>
@@ -193,7 +149,7 @@ function Main() {
               <Col xs={24} sm={12} md={8} lg={6}>
                 <pre>
                   {`[CHEAT CODE]\n`}
-                  {map(selectedItems, (k, v) => formatCheat(k, v))}
+                  {map(selectedItems, (k, v) => formatCheat(k.variant, v))}
                 </pre>
               </Col>
             </Row>
