@@ -1,5 +1,5 @@
-import { Insertable } from '../definitions/acnh'
-
+import { Variant } from '../items/items'
+import { Recipes } from '../items/recipes'
 export function parseVariation(variation: string = 'NA') {
   if (variation === 'NA' || !variation.includes('_')) {
     return ''.padStart(8, '0')
@@ -13,4 +13,4 @@ export function parseVariation(variation: string = 'NA') {
 }
 
 
-export const realId = (item: Insertable) => parseInt(parseFloat(item["Internal ID"]).toFixed(0))
+export const realId = (item: Variant | Recipes) => item.internalId
