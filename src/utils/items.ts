@@ -1,11 +1,11 @@
 import { has } from "lodash";
-import { Variant } from "../items/items";
+import { InvertedVariant } from "./definitions";
 import { Recipes } from "../items/recipes";
 
 export function isRecipe(input: any): input is Recipes {
   return has(input, 'craftedItemInternalId')
 }
 
-export function isVariant(input: any): input is Variant {
+export function isVariant(input: any): input is InvertedVariant {
   return has(input, 'uniqueEntryId') && !has(input, 'craftedItemInternalId')
 }
