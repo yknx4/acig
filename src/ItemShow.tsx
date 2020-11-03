@@ -1,6 +1,5 @@
-import { toPairs } from 'lodash'
-import React from 'react'
-import { Panel } from 'rsuite'
+import { map } from 'lodash'
+import React, { Fragment } from 'react'
 import { AnyItem } from './utils/definitions'
 import { isRecipe, isVariant } from './utils/items'
 
@@ -16,23 +15,32 @@ export function ItemShow(props: ItemShowProps) {
   const image = isRecipe(variant) ? variant.image : variant.image ?? variant.albumImage ?? variant.storageImage ?? ''
   const alt = isRecipe(variant) ? 'recipe' : variant.variation ?? ''
   return (
-    <Panel bordered bodyFill onClick={onClick} className="acitem">
-      <img src={image} height={iconHeight} alt={`${variant.name} ${alt}`} />
-      <Panel header={isRecipe(variant) ? `${variant.name} recipe` : variant.name}>
-        {isVariant(variant) && (
-          <p>
-            {variant.colors.length > 0 && <small>Colors: {variant.colors.join(', ')}</small>}
-            {variant.themes.length > 0 && <small>Themes: {variant.themes.join(', ')}</small>}
-            <small>Source: {variant.source.join(', ')}</small>
+    <div className="box">
+      <article className="media" onClick={onClick}>
+        <figure className="media-left">
+          <p className="image is-64x64">
+            <img src={image} height={iconHeight} alt={`${variant.name} ${alt}`} />
           </p>
-        )}
-        {isRecipe(variant) && (
-          <p>
-            <small>Materials: {toPairs(variant.materials).map(m => `${m[0]}: ${m[1]}`).join(', ')}</small>
-            <small>Source: {variant.source.join(', ')}</small>
-          </p>
-        )}
-      </Panel>
-    </Panel>
+        </figure>
+        <div className="media-content">
+          <div className="content">
+            <p className="is-small">
+              <strong>{isRecipe(variant) ? `${variant.name} recipe` : variant.name}</strong><br />
+              {isRecipe(variant) && <>
+                {variant.category}<br />
+
+                {map(variant.materials, (v, k) => <Fragment key={`mat-${variant.uniqueEntryId}-${k}`}>{k}: {v}<br /></Fragment>)}
+
+              </>}
+              {isVariant(variant) && <>
+                {variant.genuine !== undefined && <>{variant.genuine ? 'Genuine' : 'Fake'}<br /></>}
+                {variant.colors.join(', ')}<br />
+                {variant.themes.join(', ')}<br />
+              </>}
+            </p>
+          </div>
+        </div>
+      </article >
+    </div >
   )
 }

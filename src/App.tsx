@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import 'rsuite/dist/styles/rsuite-default.css'
+import React, { Fragment, useState } from 'react'
+import 'antd/dist/antd.css'
+import 'bulma/css/bulma.css'
 import './App.css'
-import { Col, Content, Footer, Grid, Header, Row, Container, Icon, Nav, Navbar, Sidebar, Button } from 'rsuite'
 import { map } from 'lodash'
 import leafLogo from './assets/leaf-logo.png'
 import { formatCheat } from './utils/formatCheat'
@@ -10,6 +10,7 @@ import { range } from 'lodash'
 import { Category } from './items/items'
 import { allItems, ItemsSearch } from './ItemsSearch'
 import { AnyItem } from './utils/definitions'
+import { Button } from 'antd'
 
 interface EmptyItemProps {
   slot: number
@@ -38,7 +39,7 @@ function EmptyItem(props: EmptyItemProps) {
   return <ItemShow small={true} onClick={onClick} variant={variant} />
 }
 
-const cellIndex = (row: number, column: number) => row * 10 + column
+const cellIndex = (row: number, column: number) => row * 4 + column
 
 interface InventoryGrid {
   selectedItems: Record<number, AnyItem>
@@ -48,23 +49,23 @@ interface InventoryGrid {
 function InventoryGrid(props: InventoryGrid) {
   const { selectedItems, fillCell } = props
   return (
-    <Grid fluid>
-      <Row>
-        {[0, 1, 2, 3].map((rowIndex) => (
-          <>
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((columnIndex) => (
-              <Col xs={6} key={`column-${rowIndex}-${columnIndex}`}>
+    <>
+      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((rowIndex) => (
+        <div className="tile is-ancestor" key={`row-${rowIndex}`}>
+          {[0, 1, 2, 3].map((columnIndex) => (
+            <div className="tile is-parent" key={`row-${rowIndex}-column-${columnIndex}`}>
+              <div className="tile is-child">
                 {selectedItems[cellIndex(rowIndex, columnIndex)] === undefined ? (
                   <EmptyItem onClick={() => fillCell(rowIndex, columnIndex)} slot={cellIndex(rowIndex, columnIndex)} />
                 ) : (
                     <ItemShow onClick={() => fillCell(rowIndex, columnIndex)} small={true} variant={selectedItems[cellIndex(rowIndex, columnIndex)]} />
                   )}
-              </Col>
-            ))}
-          </>
-        ))}
-      </Row>
-    </Grid>
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </>
   )
 }
 
@@ -76,47 +77,70 @@ function Main() {
   const fillIndex = (index: number) => selectItemInCell({ ...selectedItems, [index]: selectedItem })
   const fillCell = (row: number, column: number) => fillIndex(cellIndex(row, column))
   const fillEmpty = () => fillIndex(nextEmptyIndex)
+  const selectNext = () => {
+    const currentIndex = allItems.indexOf(selectedItem)
+    const nextIndex = currentIndex + 1
+    if (nextIndex < allItems.length) {
+      selectItem(allItems[nextIndex])
+    }
+  }
   return (
-    <Container>
-      <Header>
-        <Navbar appearance="inverse">
-          <Navbar.Header>
+    <>
+      <section className="hero is-small is-dark">
+        <div className="hero-body">
+          <div className="container">
             <img src={leafLogo} className="logo" alt="Animal Crossing New Horizons Inventory Generator Logo" />
-          </Navbar.Header>
-          <Navbar.Body>
-            <Nav>
-              <Nav.Item icon={<Icon icon="home" />}>AC:NH Inventory Generator V1.5.0</Nav.Item>
-            </Nav>
-          </Navbar.Body>
-        </Navbar>
-      </Header>
-      <Container>
-        <Sidebar>
-          <ItemsSearch onSelect={(item) => { selectItem(item) }} />
-          <ItemShow variant={selectedItem} />
-          <Button disabled={Object.values(selectedItems).length >= 40} onClick={fillEmpty}>
-            Fill Next Empty
-          </Button>
-        </Sidebar>
-        <Content>
-          <Grid fluid>
-            <Row className="show-grid">
-              <Col xs={24} sm={12} md={16} lg={18}>
-                <InventoryGrid selectedItems={selectedItems} fillCell={fillCell} />
-              </Col>
-              <Col xs={24} sm={12} md={8} lg={6}>
-                <pre>
-                  {`[CHEAT CODE]\n`}
-                  {map(selectedItems, (k, v) => formatCheat(k, v))}
-                </pre>
-              </Col>
-            </Row>
-          </Grid>
-        </Content>
-      </Container>
+            <h1 className="title">
+              AC:NH Inventory Generator
+      </h1>
+            <h2 className="subtitle">
+              V1.5.1
+      </h2>
+          </div>
+        </div>
+      </section>
 
-      <Footer>No rights reserved. Do whatever the f*** do you want. Ale Ornelas 2020</Footer>
-    </Container>
+      <section className="section">
+        <div className="columns">
+          <aside className="menu column is-one-quarter">
+            <div className='container is-fluid'>
+              <div className="columns">
+                <div className="column">
+                  <Button onClick={selectNext}>
+                    Select Next
+            </Button>
+                </div>
+                <div className="column">
+                  <Button disabled={Object.values(selectedItems).length >= 40} onClick={fillEmpty}>
+                    Fill Next Empty
+            </Button>
+                </div>
+              </div>
+              <ItemShow variant={selectedItem}/>
+              <ItemsSearch onSelect={(item) => { selectItem(item) }} />
+            </div>
+          </aside>
+          <div className="column is-three-quarters">
+            <InventoryGrid selectedItems={selectedItems} fillCell={fillCell} />
+          </div>
+
+        </div>
+      </section>
+
+      <section className="section">
+        <pre>
+          {`[CHEAT CODE]\n`}
+          {map(selectedItems, (k, v) => formatCheat(k, v))}
+        </pre>
+      </section>
+
+
+      <footer className="footer">
+        <div className="content has-text-centered"><p>No rights reserved. Do whatever the f*** do you want. Ale Ornelas 2020    </p>
+        </div>
+      </footer>
+
+    </>
   )
 }
 
