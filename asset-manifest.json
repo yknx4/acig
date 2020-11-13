@@ -1,26 +1,24 @@
 {
   "files": {
-    "main.css": "/acig/static/css/main.af25af94.chunk.css",
-    "main.js": "/acig/static/js/main.cd0ddc98.chunk.js",
-    "main.js.map": "/acig/static/js/main.cd0ddc98.chunk.js.map",
-    "runtime-main.js": "/acig/static/js/runtime-main.b35bf697.js",
-    "runtime-main.js.map": "/acig/static/js/runtime-main.b35bf697.js.map",
-    "static/css/2.c37a399a.chunk.css": "/acig/static/css/2.c37a399a.chunk.css",
-    "static/js/2.0b87db4b.chunk.js": "/acig/static/js/2.0b87db4b.chunk.js",
-    "static/js/2.0b87db4b.chunk.js.map": "/acig/static/js/2.0b87db4b.chunk.js.map",
+    "main.css": "/acig/static/css/main.24bf1d8e.chunk.css",
+    "main.js": "/acig/static/js/main.1936407a.chunk.js",
+    "main.js.map": "/acig/static/js/main.1936407a.chunk.js.map",
+    "runtime-main.js": "/acig/static/js/runtime-main.f0e74393.js",
+    "runtime-main.js.map": "/acig/static/js/runtime-main.f0e74393.js.map",
+    "static/css/2.d1b753f5.chunk.css": "/acig/static/css/2.d1b753f5.chunk.css",
+    "static/js/2.c39d27ec.chunk.js": "/acig/static/js/2.c39d27ec.chunk.js",
+    "static/js/2.c39d27ec.chunk.js.map": "/acig/static/js/2.c39d27ec.chunk.js.map",
     "index.html": "/acig/index.html",
-    "precache-manifest.d4b38db327a986776c62b98b6a71dfec.js": "/acig/precache-manifest.d4b38db327a986776c62b98b6a71dfec.js",
-    "service-worker.js": "/acig/service-worker.js",
-    "static/css/2.c37a399a.chunk.css.map": "/acig/static/css/2.c37a399a.chunk.css.map",
-    "static/css/main.af25af94.chunk.css.map": "/acig/static/css/main.af25af94.chunk.css.map",
-    "static/js/2.0b87db4b.chunk.js.LICENSE.txt": "/acig/static/js/2.0b87db4b.chunk.js.LICENSE.txt",
-    "static/media/leaf-logo.png": "/acig/static/media/leaf-logo.64bdcedb.png"
+    "static/css/2.d1b753f5.chunk.css.map": "/acig/static/css/2.d1b753f5.chunk.css.map",
+    "static/css/main.24bf1d8e.chunk.css.map": "/acig/static/css/main.24bf1d8e.chunk.css.map",
+    "static/js/2.c39d27ec.chunk.js.LICENSE.txt": "/acig/static/js/2.c39d27ec.chunk.js.LICENSE.txt",
+    "static/media/leaf-logo.a8cf6480.png": "/acig/static/media/leaf-logo.a8cf6480.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.b35bf697.js",
-    "static/css/2.c37a399a.chunk.css",
-    "static/js/2.0b87db4b.chunk.js",
-    "static/css/main.af25af94.chunk.css",
-    "static/js/main.cd0ddc98.chunk.js"
+    "static/js/runtime-main.f0e74393.js",
+    "static/css/2.d1b753f5.chunk.css",
+    "static/js/2.c39d27ec.chunk.js",
+    "static/css/main.24bf1d8e.chunk.css",
+    "static/js/main.1936407a.chunk.js"
   ]
 }
