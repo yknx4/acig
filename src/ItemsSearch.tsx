@@ -81,17 +81,12 @@ const searcher = memoize((value: string) => fuse.search(value, { limit: 20 }))
 
 export interface ItemsSearchProps {
   onSelect(item: AnyItem): void
+  onSecondarySelect(item: AnyItem): void
 }
 export function ItemsSearch(props: ItemsSearchProps) {
-  const { onSelect } = props
-  const [selectedOption, setSelectedOption] = useState<AnyItem | undefined | null>(undefined);
+  const { onSelect, onSecondarySelect = () => {} } = props
   const [matchedOptions, setMatchedOptions] = useState<AnyItem[]>([])
   const [search, doSearch] = useState<string>('')
-  useEffect(() => {
-    if (selectedOption != null) {
-      onSelect(selectedOption)
-    }
-  }, [selectedOption, onSelect])
   useEffect(() => {
     const result = sortBy(searcher(search), 'score')
     setMatchedOptions(result.map(r => r.item))
@@ -105,7 +100,7 @@ export function ItemsSearch(props: ItemsSearchProps) {
         <div className="tile">
           <Input placeholder="input search text" onChange={(e) => doSearch(e.target.value)} defaultValue={search} addonAfter={<SearchOutlined />}/>
         </div>
-        {options.map(o => <div key={`result-${o.uniqueEntryId}`} className='tile'><ItemShow variant={o} onClick={() => setSelectedOption(o)} /></div>)}
+        {options.map(o => <div key={`result-${o.uniqueEntryId}`} className='tile'><ItemShow variant={o} onDoubleClick={() => onSecondarySelect(o)} onClick={() => onSelect(o)} /></div>)}
       </div>
     </div>
   );

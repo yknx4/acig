@@ -7,16 +7,17 @@ interface ItemShowProps {
   variant: AnyItem
   small?: boolean
   onClick?: () => any
+  onDoubleClick?: () => any
 }
 
 export function ItemShow(props: ItemShowProps) {
-  const { variant, small = false, onClick = () => { } } = props
+  const { variant, small = false, onClick = () => { }, onDoubleClick = () => {} } = props
   const iconHeight = small ? 90 : 240
   const image = isRecipe(variant) ? variant.image : variant.image ?? variant.albumImage ?? variant.storageImage ?? ''
   const alt = isRecipe(variant) ? 'recipe' : variant.variation ?? ''
   return (
     <div className="box">
-      <article className="media" onClick={onClick}>
+      <article className="media" onClick={onClick} onDoubleClick={onDoubleClick}>
         <figure className="media-left">
           <p className="image is-64x64">
             <img src={image} height={iconHeight} alt={`${variant.name} ${alt}`} />

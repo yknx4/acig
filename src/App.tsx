@@ -74,9 +74,9 @@ function Main() {
   const [selectedItems, selectItemInCell] = useState<Record<number, AnyItem>>({})
 
   const nextEmptyIndex = range(40).find((i) => selectedItems[i] === undefined) ?? 0
-  const fillIndex = (index: number) => selectItemInCell({ ...selectedItems, [index]: selectedItem })
-  const fillCell = (row: number, column: number) => fillIndex(cellIndex(row, column))
-  const fillEmpty = () => fillIndex(nextEmptyIndex)
+  const fillIndex = (index: number, item = selectedItem) => selectItemInCell({ ...selectedItems, [index]: item })
+  const fillCell = (row: number, column: number, item = selectedItem) => fillIndex(cellIndex(row, column), item)
+  const fillEmpty = (item = selectedItem) => fillIndex(nextEmptyIndex, item)
   const selectNext = () => {
     const currentIndex = allItems.indexOf(selectedItem)
     const nextIndex = currentIndex + 1
@@ -106,18 +106,18 @@ function Main() {
             <div className='container is-fluid'>
               <div className="columns">
                 <div className="column">
-                  <Button onClick={selectNext}>
+                  <Button onClick={() => selectNext()}>
                     Select Next
             </Button>
                 </div>
                 <div className="column">
-                  <Button disabled={Object.values(selectedItems).length >= 40} onClick={fillEmpty}>
+                  <Button disabled={Object.values(selectedItems).length >= 40} onClick={() => fillEmpty()}>
                     Fill Next Empty
             </Button>
                 </div>
               </div>
               <ItemShow variant={selectedItem}/>
-              <ItemsSearch onSelect={(item) => { selectItem(item) }} />
+              <ItemsSearch onSecondarySelect={fillEmpty} onSelect={(item) => { selectItem(item) }} />
             </div>
           </aside>
           <div className="column is-three-quarters">
