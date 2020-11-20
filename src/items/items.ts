@@ -4,6 +4,7 @@ export interface Items {
   patternTitle?: null | string;
   diy?: boolean;
   patternCustomize?: boolean;
+  kitType?: KitType | null;
   size?: Size;
   surface?: boolean;
   exchangePrice?: number | null;
@@ -34,10 +35,13 @@ export interface Items {
   curtainColor?: null | string;
   ceilingType?: CeilingType;
   sizeCategory?: SizeCategory;
-  stackSize?: number;
-  customize?: boolean;
+  stackSize?: number | null;
+  customize?: boolean | null;
   uses?: number;
-  seasonalAvailability?: SeasonalAvailability;
+  seasonalAvailability?: Seasonallity;
+  seasonality?: Seasonallity;
+  gender?: Gender;
+  villagerGender?: Gender | null;
   mannequinPiece?: boolean | null;
   style1?: Style;
   style2?: Style;
@@ -110,6 +114,12 @@ export enum ExchangeCurrency {
   NookMiles = 'Nook Miles',
 }
 
+export enum Gender {
+  Free = 'Free',
+  Manly = 'Manly',
+  Womanly = 'Womanly',
+}
+
 export enum HhaCategory {
   AC = 'AC',
   Appliance = 'Appliance',
@@ -131,6 +141,11 @@ export enum InteractEnum {
   Trash = 'Trash',
   Wardrobe = 'Wardrobe',
   Workbench = 'Workbench',
+}
+
+export enum KitType {
+  Normal = 'Normal',
+  Pumpkin = 'Pumpkin',
 }
 
 export enum LightingType {
@@ -167,8 +182,9 @@ export enum PrimaryShape {
   Salopette = 'Salopette',
 }
 
-export enum SeasonalAvailability {
+export enum Seasonallity {
   AllYear = 'All Year',
+  Autumn = 'Autumn',
   Fall = 'Fall',
   Spring = 'Spring',
   Summer = 'Summer',
@@ -230,11 +246,11 @@ export interface Variant {
   uniqueEntryId: string;
   colors: Color[];
   pattern?: null | string;
-  bodyCustomize?: boolean;
+  bodyCustomize?: boolean | null;
   bodyTitle?: BodyTitle | null;
   source: Source[];
   internalId: number;
-  buy: number;
+  buy: number | null;
   sell: number | null;
   themes: Theme[];
   closetImage?: string;
@@ -290,6 +306,7 @@ export enum BodyTitle {
   PaintColor = 'Paint color',
   PlateColor = 'Plate color',
   PumpkinColor = 'Pumpkin color',
+  RaceCarColors = 'Race-car colors',
   RoofColor = 'Roof color',
   Season = 'Season',
   ShellColor = 'Shell color',
@@ -364,10 +381,12 @@ export enum Source {
   DonTReturnLostItem = "Don't return lost item",
   DonTReturnTreasureQuestItem = "Don't return treasure quest item",
   EggBalloon = 'Egg balloon',
+  Empty = '',
   ExpiredTurnips = 'Expired turnips',
   Fishing = 'Fishing',
   FishingTourney = 'Fishing Tourney',
   Flick = 'Flick',
+  Franklin = 'Franklin',
   GlowingDigSpot = 'Glowing dig spot',
   Gullivarrr = 'Gullivarrr',
   Gulliver = 'Gulliver',
@@ -377,6 +396,7 @@ export enum Source {
   HittingARock = 'Hitting a rock',
   Isabelle = 'Isabelle',
   Jack = 'Jack',
+  Jingle = 'Jingle',
   JollyReddSTreasureTrawler = "Jolly Redd's Treasure Trawler",
   KKConcert = 'K.K. concert',
   Kicks = 'Kicks',
@@ -532,6 +552,7 @@ export enum VersionAdded {
   The130 = '1.3.0',
   The140 = '1.4.0',
   The150 = '1.5.0',
+  The160 = '1.6.0',
 }
 
 export enum VfxType {

@@ -33,6 +33,7 @@ export enum CardColorEnum {
   LightGray = 'light gray',
   Orange = 'orange',
   Pink = 'pink',
+  Purple = 'purple',
   Red = 'red',
   Silver = 'silver',
   White = 'white',
@@ -71,4 +72,5 @@ export enum VersionAdded {
   The130 = '1.3.0',
   The140 = '1.4.0',
   The150 = '1.5.0',
+  The160 = '1.6.0',
 }

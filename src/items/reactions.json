@@ -151,6 +151,16 @@
   },
   {
     "sourceSheet": "Reactions",
+    "name": "Excited",
+    "image": "https://acnhcdn.com/latest/ManpuIcon/AddExcited.png",
+    "source": ["Hip Reaction Collection"],
+    "sourceNotes": null,
+    "versionAdded": "1.6.0",
+    "iconFilename": "AddExcited",
+    "uniqueEntryId": "n7AxvQcyuPEtdD7uF"
+  },
+  {
+    "sourceSheet": "Reactions",
     "name": "Fearful",
     "image": "https://acnhcdn.com/latest/ManpuIcon/Shaking.png",
     "source": ["Normal villagers"],
@@ -218,6 +228,16 @@
     "versionAdded": "1.0.0",
     "iconFilename": "BrokenHeart",
     "uniqueEntryId": "ex6gKZu6zsyd6MgDr"
+  },
+  {
+    "sourceSheet": "Reactions",
+    "name": "Here You Go",
+    "image": "https://acnhcdn.com/latest/ManpuIcon/AddHereYouGo.png",
+    "source": ["Hip Reaction Collection"],
+    "sourceNotes": null,
+    "versionAdded": "1.6.0",
+    "iconFilename": "AddHereYouGo",
+    "uniqueEntryId": "7mskmgbcDnZMfaa8d"
   },
   {
     "sourceSheet": "Reactions",
@@ -391,6 +411,16 @@
   },
   {
     "sourceSheet": "Reactions",
+    "name": "Sit Down",
+    "image": "https://acnhcdn.com/latest/ManpuIcon/AddSitDown.png",
+    "source": ["Hip Reaction Collection"],
+    "sourceNotes": null,
+    "versionAdded": "1.6.0",
+    "iconFilename": "AddSitDown",
+    "uniqueEntryId": "vZLdKXLdnjvN4J5Je"
+  },
+  {
+    "sourceSheet": "Reactions",
     "name": "Sleepy",
     "image": "https://acnhcdn.com/latest/ManpuIcon/Sleepy.png",
     "source": ["Peppy villagers"],
@@ -421,6 +451,16 @@
   },
   {
     "sourceSheet": "Reactions",
+    "name": "Sniff Sniff",
+    "image": "https://acnhcdn.com/latest/ManpuIcon/AddSmell.png",
+    "source": ["Hip Reaction Collection"],
+    "sourceNotes": null,
+    "versionAdded": "1.6.0",
+    "iconFilename": "AddSmell",
+    "uniqueEntryId": "M3JksnoqmWyo9otrd"
+  },
+  {
+    "sourceSheet": "Reactions",
     "name": "Sorrow",
     "image": "https://acnhcdn.com/latest/ManpuIcon/Crying.png",
     "source": ["Lazy villagers"],
@@ -441,6 +481,26 @@
   },
   {
     "sourceSheet": "Reactions",
+    "name": "Ta-da",
+    "image": "https://acnhcdn.com/latest/ManpuIcon/AddPraise.png",
+    "source": ["Hip Reaction Collection"],
+    "sourceNotes": null,
+    "versionAdded": "1.6.0",
+    "iconFilename": "AddPraise",
+    "uniqueEntryId": "r5knh2R8vmx7J4pxR"
+  },
+  {
+    "sourceSheet": "Reactions",
+    "name": "Take a Picture",
+    "image": "https://acnhcdn.com/latest/ManpuIcon/AddTakePictures.png",
+    "source": ["Hip Reaction Collection"],
+    "sourceNotes": null,
+    "versionAdded": "1.6.0",
+    "iconFilename": "AddTakePictures",
+    "uniqueEntryId": "77uFv5cZp43Rt3LaP"
+  },
+  {
+    "sourceSheet": "Reactions",
     "name": "Thought",
     "image": "https://acnhcdn.com/latest/ManpuIcon/Thinking.png",
     "source": ["Snooty villagers"],
@@ -451,6 +511,26 @@
   },
   {
     "sourceSheet": "Reactions",
+    "name": "Wave Goodbye",
+    "image": "https://acnhcdn.com/latest/ManpuIcon/AddWaveHands.png",
+    "source": ["Hip Reaction Collection"],
+    "sourceNotes": null,
+    "versionAdded": "1.6.0",
+    "iconFilename": "AddWaveHands",
+    "uniqueEntryId": "dbiQgwwQZxAQw54ur"
+  },
+  {
+    "sourceSheet": "Reactions",
+    "name": "Work Out",
+    "image": "https://acnhcdn.com/latest/ManpuIcon/AddGymnastics.png",
+    "source": ["Hip Reaction Collection"],
+    "sourceNotes": null,
+    "versionAdded": "1.6.0",
+    "iconFilename": "AddGymnastics",
+    "uniqueEntryId": "oXMGkQsnaXyB2WLKp"
+  },
+  {
+    "sourceSheet": "Reactions",
     "name": "Worry",
     "image": "https://acnhcdn.com/latest/ManpuIcon/Worried.png",
     "source": ["Cranky villagers"],
@@ -458,5 +538,15 @@
     "versionAdded": "1.0.0",
     "iconFilename": "Worried",
     "uniqueEntryId": "TygKeKxvotLEzWqvY"
+  },
+  {
+    "sourceSheet": "Reactions",
+    "name": "Yoga",
+    "image": "https://acnhcdn.com/latest/ManpuIcon/AddYoga.png",
+    "source": ["Hip Reaction Collection"],
+    "sourceNotes": null,
+    "versionAdded": "1.6.0",
+    "iconFilename": "AddYoga",
+    "uniqueEntryId": "yeh2FF6fzMn3BdAi6"
   }
 ]

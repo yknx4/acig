@@ -1,7 +1,7 @@
 {
   "name": "acig",
   "homepage": "https://yknx4.github.io/acig/",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
     "@testing-library/jest-dom": "^4.2.4",

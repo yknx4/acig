@@ -94,7 +94,7 @@ function Main() {
               AC:NH Inventory Generator
       </h1>
             <h2 className="subtitle">
-              V1.5.1
+              V1.6.0
       </h2>
           </div>
         </div>

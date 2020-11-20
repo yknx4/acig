@@ -21,4 +21,5 @@ export enum SourceSheet {
 export enum VersionAdded {
   The100 = '1.0.0',
   The150 = '1.5.0',
+  The160 = '1.6.0',
 }
