@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import 'antd/dist/antd.css'
 import 'bulma/css/bulma.css'
 import './App.css'
@@ -10,7 +10,7 @@ import { range } from 'lodash'
 import { Category } from './items/items'
 import { allItems, ItemsSearch } from './ItemsSearch'
 import { AnyItem } from './utils/definitions'
-import { Button } from 'antd'
+import { Button, message } from 'antd'
 
 interface EmptyItemProps {
   slot: number
@@ -76,7 +76,10 @@ function Main() {
   const nextEmptyIndex = range(40).find((i) => selectedItems[i] === undefined) ?? 0
   const fillIndex = (index: number, item = selectedItem) => selectItemInCell({ ...selectedItems, [index]: item })
   const fillCell = (row: number, column: number, item = selectedItem) => fillIndex(cellIndex(row, column), item)
-  const fillEmpty = (item = selectedItem) => fillIndex(nextEmptyIndex, item)
+  const fillEmpty = (item = selectedItem) => {
+    message.success(`Added ${item.name} to the list.`)
+    fillIndex(nextEmptyIndex, item)
+  }
   const selectNext = () => {
     const currentIndex = allItems.indexOf(selectedItem)
     const nextIndex = currentIndex + 1
@@ -116,7 +119,7 @@ function Main() {
             </Button>
                 </div>
               </div>
-              <ItemShow variant={selectedItem}/>
+              <ItemShow variant={selectedItem} />
               <ItemsSearch onSecondarySelect={fillEmpty} onSelect={(item) => { selectItem(item) }} />
             </div>
           </aside>
