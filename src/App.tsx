@@ -41,12 +41,12 @@ function EmptyItem(props: EmptyItemProps) {
 
 const cellIndex = (row: number, column: number) => row * 4 + column
 
-interface InventoryGrid {
+interface InventoryGridProps {
   selectedItems: Record<number, AnyItem>
   fillCell: (row: number, col: number) => void
 }
 
-function InventoryGrid(props: InventoryGrid) {
+function InventoryGrid(props: InventoryGridProps) {
   const { selectedItems, fillCell } = props
   return (
     <>

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Items, Variant } from './items/items'
+import { Items } from './items/items'
 import untypedItems from './items/items.json'
 import { Recipes } from './items/recipes'
 import untypedRecipes from './items/recipes.json'
 import Fuse from 'fuse.js'
 import { memoize, flatMap, sortBy } from 'lodash'
-import { isRecipe, isVariant } from './utils/items'
 import { InvertedVariant, AnyItem } from './utils/definitions'
 import { Input } from 'antd'
 import { ItemShow } from './ItemShow'
@@ -16,29 +15,29 @@ const recipes: Recipes[] = untypedRecipes as unknown as Recipes[]
 const processedItems: InvertedVariant[] = flatMap(items, ({ variants, ...item }) => variants.map(v => ({ ...v, item, name: item.name })))
 export const allItems: AnyItem[] = [...processedItems, ...recipes]
 
-function createLabel(value: AnyItem) {
-  if (isRecipe(value)) {
-    return `${value.name} recipe`
-  }
-  if (isVariant(value)) {
-    const postfix = value.colors.length > 0 ? ` - ${value.colors.join('&')}` : ''
-    if (value.genuine !== undefined) {
-      return `${value.genuine ? 'Genuine' : 'Fake'} ${value.name}${postfix}`
-    }
-    if (value.variation != null) {
-      return `${value.variation} ${value.name}${postfix}`
-    }
-    return value.name + postfix
-  }
-  return 'SHOULD NOT HAPPEN'
-}
+// function createLabel(value: AnyItem) {
+//   if (isRecipe(value)) {
+//     return `${value.name} recipe`
+//   }
+//   if (isVariant(value)) {
+//     const postfix = value.colors.length > 0 ? ` - ${value.colors.join('&')}` : ''
+//     if (value.genuine !== undefined) {
+//       return `${value.genuine ? 'Genuine' : 'Fake'} ${value.name}${postfix}`
+//     }
+//     if (value.variation != null) {
+//       return `${value.variation} ${value.name}${postfix}`
+//     }
+//     return value.name + postfix
+//   }
+//   return 'SHOULD NOT HAPPEN'
+// }
 
 
-interface AnyItemOption {
-  value: string
-  label: string
-  data: AnyItem
-}
+// interface AnyItemOption {
+//   value: string
+//   label: string
+//   data: AnyItem
+// }
 
 const options = {
   includeScore: true,
