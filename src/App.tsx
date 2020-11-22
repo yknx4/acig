@@ -7,7 +7,6 @@ import leafLogo from './assets/leaf-logo.png'
 import { formatCheat } from './utils/formatCheat'
 import { ItemShow } from './ItemShow'
 import { range } from 'lodash'
-import { Category } from './items/items'
 import { allItems, ItemsSearch } from './ItemsSearch'
 import { AnyItem } from './utils/definitions'
 import { Button, message } from 'antd'
@@ -23,8 +22,7 @@ function EmptyItem(props: EmptyItemProps) {
   const variant: AnyItem = {
     name: `Empty Slot #${props.slot + 1}`,
     item: {
-      name: `Empty Slot #${props.slot + 1}`,
-      sourceSheet: Category.Other
+      name: `Empty Slot #${props.slot + 1}`
     },
     image: leafLogo,
     filename: '',

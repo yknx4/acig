@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { Items } from './items/items'
 import untypedItems from './items/items.json'
-import { Recipes } from './items/recipes'
 import untypedRecipes from './items/recipes.json'
 import Fuse from 'fuse.js'
-import { memoize, flatMap, sortBy } from 'lodash'
+import { memoize, flatMap } from 'lodash'
 import { InvertedVariant, AnyItem } from './utils/definitions'
 import { Input } from 'antd'
 import { ItemShow } from './ItemShow'
 import {SearchOutlined} from '@ant-design/icons'
+import { inflateRecipes } from './utils/items'
+import { Recipes } from './items/recipes'
 
 const items: Items[] = untypedItems as Items[]
-const recipes: Recipes[] = untypedRecipes as unknown as Recipes[]
+const recipes = (untypedRecipes as unknown as Recipes[]).map(inflateRecipes)
 const processedItems: InvertedVariant[] = flatMap(items, ({ variants, ...item }) => variants.map(v => ({ ...v, item, name: item.name })))
-export const allItems: AnyItem[] = [...processedItems, ...recipes]
+export const allItems: AnyItem[] = [...processedItems, ...recipes].filter(i => i.item?.unlocked ?? true)
 
 const options = {
   includeScore: true,
