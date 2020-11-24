@@ -14,7 +14,7 @@ import { Recipes } from './items/recipes'
 const items: Items[] = untypedItems as Items[]
 const recipes = (untypedRecipes as unknown as Recipes[]).map(inflateRecipes)
 const processedItems: InvertedVariant[] = flatMap(items, ({ variants, ...item }) => variants.map(v => ({ ...v, item, name: item.name })))
-export const allItems: AnyItem[] = [...processedItems, ...recipes].filter(i => i.item?.unlocked ?? true)
+export const allItems: AnyItem[] = [...processedItems, ...recipes]
 
 const options = {
   includeScore: true,
