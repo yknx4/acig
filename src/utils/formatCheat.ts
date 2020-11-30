@@ -5,24 +5,34 @@ import { isRecipe } from './items';
 import { Variant } from '../items/items';
 import { Recipes } from '../items/recipes';
 
+const PLAYER_1_1_ADDRESS = 0xAD3C7FD8
+const PLAYER_1_2_ADDRESS = 0xAD3C7F20
+const PLAYER_OFFSET = 0x133B78
+const SLOT_OFFSET = 0x8
+
+export function getInventoryAddres(player: number, slot: number) {
+  const basePlayerAddress = slot >= 20 ? PLAYER_1_2_ADDRESS : PLAYER_1_1_ADDRESS
+  const actualSlotCount = slot >= 20 ? slot - 20 : slot
+  const playerAddress = basePlayerAddress + (player * PLAYER_OFFSET)
+  return decimalToHex((playerAddress + (actualSlotCount * SLOT_OFFSET)))
+}
+
 type Player = keyof typeof ot
 
 const inventoryOffsets: Record<Player, number> = {
-  "Player 1": 0xAD3C7FD8,
-  "Player 2": 0xAD4FBB50,
-  "Player 3": 0xAD62F6C8,
-  "Player 4": 0xAD763240,
-  "Player 5": 0xAD763240, //WRONG
-  "Player 6": 0xAD763240, //WRONG
-  "Player 7": 0xAD763240, //WRONG
-  "Player 8": 0xAD763240, //WRONG
+  "Player 1": 0,
+  "Player 2": 1,
+  "Player 3": 2,
+  "Player 4": 3,
+  "Player 5": 4,
+  "Player 6": 5,
+  "Player 7": 6,
+  "Player 8": 7
 }
 
-const slotSize = 0x8
-
 function generateTemplate(index: number, player: Player = "Player 1"): [string, string, string, string] {
-  const inventoryPosition = inventoryOffsets[player] + (index * slotSize)
-  return ["08100000", inventoryPosition.toString(16).toUpperCase(), "00000000", "0000FFFE"]
+  const inventoryPosition = getInventoryAddres(inventoryOffsets[player], index)
+  return ["08100000", inventoryPosition, "00000000", "0000FFFE"]
 }
 
 
@@ -37,6 +47,6 @@ function itemCheat(item: Variant): string[] {
 export function formatCheat(item: Variant | Recipes, indexAsString: string, player: Player = "Player 1") {
   const index = parseInt(indexAsString, 10);
   const template = generateTemplate(index, player)
-  const [thirdField, fourthField] =  isRecipe(item) ? recipeCheat(item) : itemCheat(item)
+  const [thirdField, fourthField] = isRecipe(item) ? recipeCheat(item) : itemCheat(item)
   return `${template[0]} ${template[1]} ${thirdField} ${fourthField}\n`;
 }
