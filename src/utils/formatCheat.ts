@@ -5,8 +5,8 @@ import { isRecipe } from './items';
 import { Variant } from '../items/items';
 import { Recipes } from '../items/recipes';
 
-const PLAYER_1_1_ADDRESS = 0xAD3C7FD8
-const PLAYER_1_2_ADDRESS = 0xAD3C7F20
+const PLAYER_1_1_ADDRESS = 0xACDAD530
+const PLAYER_1_2_ADDRESS = 0xACDAD5E8
 const PLAYER_OFFSET = 0x133B78
 const SLOT_OFFSET = 0x8
 
