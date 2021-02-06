@@ -2,31 +2,35 @@ export interface Recipes {
   sourceSheet: SourceSheet;
   name: string;
   image: string;
+  imageSh: null | string;
   buy: number;
   sell: number | null;
   exchangePrice: number | null;
   exchangeCurrency: ExchangeCurrency | null;
   source: string[];
   sourceNotes: null | string;
+  seasonEvent: null | string;
+  seasonEventExclusive: boolean | null;
   versionAdded: VersionAdded;
   unlocked: boolean;
-  unlockNotes: UnlockNotes | null;
   recipesToUnlock: number;
   category: Category;
   craftedItemInternalId: number;
-  cardColor: CardColorEnum | number | null;
+  cardColor: CardColor | null;
   diyIconFilename: string;
+  diyIconFilenameSh: null | string;
   serialId: number;
   internalId: number;
   uniqueEntryId: string;
   materials: {[key: string]: number};
 }
 
-export enum CardColorEnum {
+export enum CardColor {
   Beige = 'beige',
   Blue = 'blue',
   Brick = 'brick',
   Brown = 'brown',
+  Cream = 'cream',
   DarkGray = 'dark gray',
   Gold = 'gold',
   Green = 'green',
@@ -60,11 +64,6 @@ export enum SourceSheet {
   Recipes = 'Recipes',
 }
 
-export enum UnlockNotes {
-  The20200401BCAT110A = '2020-04-01; BCAT; 1.1.0a',
-  The20200601BCAT121C = '2020-06-01; BCAT; 1.2.1c',
-}
-
 export enum VersionAdded {
   The100 = '1.0.0',
   The110 = '1.1.0',
@@ -73,4 +72,5 @@ export enum VersionAdded {
   The140 = '1.4.0',
   The150 = '1.5.0',
   The160 = '1.6.0',
+  The170 = '1.7.0',
 }

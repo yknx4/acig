@@ -10,6 +10,8 @@ export interface Items {
   exchangePrice?: number | null;
   exchangeCurrency?: ExchangeCurrency | null;
   sourceNotes?: null | string;
+  seasonEvent?: null | string;
+  seasonEventExclusive?: boolean | null;
   hhaBasePoints?: number | null;
   hhaCategory?: HhaCategory | null;
   interact?: boolean | InteractEnum;
@@ -20,7 +22,6 @@ export interface Items {
   catalog?: Catalog;
   versionAdded?: VersionAdded;
   unlocked?: boolean;
-  unlockNotes?: null | string;
   set?: null | string;
   series?: null | string;
   customizationKitCost?: number | null;
@@ -36,13 +37,13 @@ export interface Items {
   ceilingType?: CeilingType;
   sizeCategory?: SizeCategory;
   stackSize?: number | null;
-  customize?: boolean | null;
+  customize?: boolean;
   uses?: number;
-  seasonalAvailability?: Seasonallity;
-  seasonality?: Seasonallity;
+  seasonalAvailability?: SeasonalAvailability;
+  seasonality?: SeasonalAvailability;
+  mannequinSeason?: SeasonalAvailability | null;
   gender?: Gender;
   villagerGender?: Gender | null;
-  mannequinPiece?: boolean | null;
   style1?: Style;
   style2?: Style;
   sortOrder?: number;
@@ -54,7 +55,7 @@ export interface Items {
   fossilGroup?: string;
   description?: string;
   museum?: Museum;
-  inventoryFilename?: null | string;
+  inventoryFilename?: string;
   storageFilename?: null | string;
   category?: Category;
   realArtworkTitle?: string;
@@ -146,14 +147,26 @@ export enum InteractEnum {
 export enum KitType {
   Normal = 'Normal',
   Pumpkin = 'Pumpkin',
+  RainbowFeather = 'Rainbow feather',
 }
 
 export enum LightingType {
   Candle = 'Candle',
   Emission = 'Emission',
+  EmissionOnly = 'EmissionOnly',
+  FluorLamp = 'FluorLamp',
   Fluorescent = 'Fluorescent',
   Monitor = 'Monitor',
   Spotlight = 'Spotlight',
+}
+
+export enum SeasonalAvailability {
+  AllYear = 'All Year',
+  Autumn = 'Autumn',
+  Fall = 'Fall',
+  Spring = 'Spring',
+  Summer = 'Summer',
+  Winter = 'Winter',
 }
 
 export enum Museum {
@@ -180,15 +193,6 @@ export enum PrimaryShape {
   Rib = 'Rib',
   Robe = 'Robe',
   Salopette = 'Salopette',
-}
-
-export enum Seasonallity {
-  AllYear = 'All Year',
-  Autumn = 'Autumn',
-  Fall = 'Fall',
-  Spring = 'Spring',
-  Summer = 'Summer',
-  Winter = 'Winter',
 }
 
 export enum SecondaryShape {
@@ -250,7 +254,7 @@ export interface Variant {
   bodyTitle?: BodyTitle | null;
   source: Source[];
   internalId: number;
-  buy: number | null;
+  buy: number;
   sell: number | null;
   themes: Theme[];
   closetImage?: string;
@@ -258,7 +262,7 @@ export interface Variant {
   labelThemes?: LabelTheme[];
   framedImage?: null | string;
   albumImage?: null | string;
-  inventoryImage?: null | string;
+  inventoryImage?: string;
   genuine?: boolean;
   highResTexture?: null;
 }
@@ -357,12 +361,11 @@ export enum Source {
   Birthday = 'Birthday',
   Blathers = 'Blathers',
   Breeding = 'Breeding',
-  BugOff = 'Bug-Off',
-  BunnyDay = 'Bunny Day',
   BuryingBellsInAGlowingSpot = 'Burying bells in a glowing spot',
   CJ = 'C.J.',
   CatchingWithANet = 'Catching with a net',
   CedarTree = 'Cedar Tree',
+  CheckToyDayStockingsTheDayAfterToyDay = 'Check Toy Day stockings the day after Toy Day',
   CherryTree = 'Cherry Tree',
   ChoppingABambooTree = 'Chopping a bamboo tree',
   ChoppingATree = 'Chopping a tree',
@@ -374,17 +377,14 @@ export enum Source {
   DeliveringItemForAVillager = 'Delivering item for a villager',
   DigSpot = 'Dig Spot',
   DiggingUpAFullyGrownBush = 'Digging up a fully grown bush',
-  DiggingUpAPartiallyGrownBush = 'Digging up a partially grown bush',
   DiggingUpAPumpkinPlant = 'Digging up a pumpkin plant',
   DiveSpot = 'Dive spot',
   DodoAirlines = 'Dodo Airlines',
   DonTReturnLostItem = "Don't return lost item",
   DonTReturnTreasureQuestItem = "Don't return treasure quest item",
   EggBalloon = 'Egg balloon',
-  Empty = '',
   ExpiredTurnips = 'Expired turnips',
   Fishing = 'Fishing',
-  FishingTourney = 'Fishing Tourney',
   Flick = 'Flick',
   Franklin = 'Franklin',
   GlowingDigSpot = 'Glowing dig spot',
@@ -406,7 +406,6 @@ export enum Source {
   MOM = 'Mom',
   Mail = 'Mail',
   MayDayTour = 'May Day Tour',
-  NewYearSEve = "New Year's Eve",
   Nintendo = 'Nintendo',
   NookMilesRedemption = 'Nook Miles Redemption',
   NookSCranny = "Nook's Cranny",
@@ -418,12 +417,12 @@ export enum Source {
   OnGround = 'On ground',
   OrangeTree = 'Orange Tree',
   Pascal = 'Pascal',
+  Pavé = 'Pavé',
   PeachTree = 'Peach Tree',
   PearTree = 'Pear Tree',
   PickingFlowers = 'Picking flowers',
   PickingPumpkins = 'Picking pumpkins',
   PlantingABambooShoot = 'Planting a bamboo shoot',
-  PlantingABushStart = 'Planting a bush start',
   PlantingACedarSapling = 'Planting a cedar sapling',
   PlantingACherry = 'Planting a cherry',
   PlantingACoconut = 'Planting a coconut',
@@ -448,6 +447,7 @@ export enum Source {
   Wilbur = 'Wilbur',
   WishingOnShootingStars = 'Wishing on shooting stars',
   WrappingAPresent = 'Wrapping a present',
+  Zipper = 'Zipper',
 }
 
 export enum Theme {
@@ -553,6 +553,7 @@ export enum VersionAdded {
   The140 = '1.4.0',
   The150 = '1.5.0',
   The160 = '1.6.0',
+  The170 = '1.7.0',
 }
 
 export enum VfxType {
